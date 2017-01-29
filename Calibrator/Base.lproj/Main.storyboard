@@ -45,6 +45,7 @@
                                 <connections>
                                     <outlet property="descriptionLabel" destination="cbN-Bk-wTe" id="gaK-Ib-Z0r"/>
                                     <outlet property="probabilityLabel" destination="459-IC-Zxm" id="tPX-kC-rnF"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="DNx-wH-p1m"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -77,8 +78,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W5y-fA-Vma">
-                                <rect key="frame" x="16" y="72" width="343" height="125"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W5y-fA-Vma">
+                                <rect key="frame" x="16" y="84" width="343" height="125"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prediction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="af0-mS-VXx">
                                         <rect key="frame" x="0.0" y="0.0" width="77.5" height="20.5"/>
@@ -174,7 +175,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o12-ju-T0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079.2" y="138.98050974512745"/>
+            <point key="canvasLocation" x="1132" y="482"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="DNx-wH-p1m"/>
+    </inferredMetricsTieBreakers>
 </document>

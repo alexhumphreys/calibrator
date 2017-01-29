@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class PredictionTableViewController: UITableViewController {
     
@@ -16,6 +17,8 @@ class PredictionTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.leftBarButtonItem = editButtonItem
 
         loadSamplePredictions()
     }
@@ -61,17 +64,16 @@ class PredictionTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            predictions.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -80,31 +82,51 @@ class PredictionTableViewController: UITableViewController {
     }
     */
 
-    /*
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
-    */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? "") {
+        case "AddItem":
+            os_log("Adding a new prediction.", log: OSLog.default, type: .debug)
+        case "ShowDetail":
+            guard let predictionDetailViewController = segue.destination as? PredictionViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            guard let selectedPredictionCell = sender as? PredictionTableViewCell else {
+                fatalError("Unexpected sender: \(sender)")
+            }
+            guard let indexPath = tableView.indexPath(for: selectedPredictionCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedPrediction = predictions[indexPath.row]
+            predictionDetailViewController.prediction = selectedPrediction
+        default:
+            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
+        }
     }
-    */
 
     //MARK: Actions
     @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? PredictionViewController, let prediction = sourceViewController.prediction {
-            
-            let newIndexPath = IndexPath(row: predictions.count, section: 0)
-            predictions.append(prediction)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                predictions[selectedIndexPath.row] = prediction
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            } else {
+                let newIndexPath = IndexPath(row: predictions.count, section: 0)
+                predictions.append(prediction)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+                
+            }
             
         }
     }

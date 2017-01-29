@@ -15,33 +15,46 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
     @IBOutlet weak var predictionTextField: UITextField!
     @IBOutlet weak var probabilityTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-
+    
     var prediction: Prediction?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        // Set up views if editing an existing Prediction
+        if let prediction = prediction {
+            predictionTextField.text = prediction.description
+            probabilityTextField.text = String(prediction.probability)
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     //MARK: UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-
+        
     }
-
+    
     
     //MARK: Navigation
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddMealMode {
+            dismiss(animated: true, completion: nil)
+        } else if let owningNavigationController = navigationController {
+            owningNavigationController.popViewController(animated: true)
+        } else {
+            fatalError("The PredictionViewController is not inside a navigation controller.")
+        }
     }
     
     // This method lets you configure a view controller before it's presented.
@@ -58,6 +71,6 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         
         prediction = Prediction(description: description!, probability: probability!)
     }
-
+    
 }
 
