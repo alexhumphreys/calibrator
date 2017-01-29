@@ -43,7 +43,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="descriptionLabel" destination="cbN-Bk-wTe" id="gaK-Ib-Z0r"/>
+                                    <outlet property="contentLabel" destination="cbN-Bk-wTe" id="p3R-WC-jKy"/>
                                     <outlet property="probabilityLabel" destination="459-IC-Zxm" id="tPX-kC-rnF"/>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="DNx-wH-p1m"/>
                                 </connections>
@@ -131,7 +131,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="predictionTextField" destination="Sab-2n-voJ" id="2KP-6J-MgY"/>
+                        <outlet property="contentTextField" destination="Sab-2n-voJ" id="vLg-Ia-02h"/>
                         <outlet property="probabilityTextField" destination="bAK-em-UsT" id="0Ot-H4-MBZ"/>
                         <outlet property="saveButton" destination="uI7-R3-1eM" id="OJD-wh-qGE"/>
                     </connections>

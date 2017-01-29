@@ -8,15 +8,22 @@
 
 import UIKit
 
-class Prediction {
+class Prediction: NSObject {
     
     //MARK: Properties
     
-    var description: String
+    var content: String
     var probability: Int
     
-    init(description: String, probability: Int) {
-        self.description = description
+    //MARK: Types
+    
+    struct PropertyKey {
+        static let content = "content"
+        static let probability = "probability"
+    }
+    
+    init(content: String, probability: Int) {
+        self.content = content
         self.probability = probability
     }
 }

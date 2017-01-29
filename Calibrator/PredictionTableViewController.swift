@@ -50,7 +50,7 @@ class PredictionTableViewController: UITableViewController {
         
         let prediction = predictions[indexPath.row]
         
-        cell.descriptionLabel.text = prediction.description
+        cell.contentLabel.text = prediction.content
         cell.probabilityLabel.text = String(prediction.probability)
         
         return cell
@@ -134,8 +134,8 @@ class PredictionTableViewController: UITableViewController {
     //MARK: Private Methods
     
     private func loadSamplePredictions() {
-        let prediction1  = Prediction(description: "X will win sport", probability: 70)
-        let prediction2  = Prediction(description: "X will increase in value", probability: 60)
+        let prediction1  = Prediction(content: "X will win sport", probability: 70)
+        let prediction2  = Prediction(content: "X will increase in value", probability: 60)
         
         predictions += [prediction1, prediction2]
         

@@ -12,7 +12,7 @@ import os.log
 class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
     //MARK: Properties
-    @IBOutlet weak var predictionTextField: UITextField!
+    @IBOutlet weak var contentTextField: UITextField!
     @IBOutlet weak var probabilityTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -24,7 +24,7 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         
         // Set up views if editing an existing Prediction
         if let prediction = prediction {
-            predictionTextField.text = prediction.description
+            contentTextField.text = prediction.content
             probabilityTextField.text = String(prediction.probability)
         }
     }
@@ -66,10 +66,10 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
             return
         }
         
-        let description = predictionTextField.text
+        let content = contentTextField.text
         let probability = Int(probabilityTextField.text!)
         
-        prediction = Prediction(description: description!, probability: probability!)
+        prediction = Prediction(content: content!, probability: probability!)
     }
     
 }

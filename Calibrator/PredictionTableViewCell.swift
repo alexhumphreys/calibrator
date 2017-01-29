@@ -11,7 +11,7 @@ import UIKit
 class PredictionTableViewCell: UITableViewCell {
     
     //Mark: Properties
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var probabilityLabel: UILabel!
 
     override func awakeFromNib() {
