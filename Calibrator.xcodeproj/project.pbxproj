@@ -155,6 +155,7 @@
 				TargetAttributes = {
 					FA2F49C21E3D5679007265C2 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = YSCXPVSD32;
 						ProvisioningStyle = Automatic;
 					};
 					FA2F49D61E3D5679007265C2 = {
@@ -351,6 +352,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YSCXPVSD32;
 				INFOPLIST_FILE = Calibrator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Calibrator;
@@ -363,6 +365,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = YSCXPVSD32;
 				INFOPLIST_FILE = Calibrator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Calibrator;
@@ -418,6 +421,7 @@
 				FA2F49E21E3D5679007265C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FA2F49E31E3D5679007265C2 /* Build configuration list for PBXNativeTarget "CalibratorTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +430,7 @@
 				FA2F49E51E3D5679007265C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

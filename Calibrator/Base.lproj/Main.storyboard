@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1CX-05-Bxa" id="6fT-JM-rlb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="459-IC-Zxm">
@@ -79,7 +79,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W5y-fA-Vma">
-                                <rect key="frame" x="16" y="84" width="343" height="125"/>
+                                <rect key="frame" x="16" y="84" width="343" height="377.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prediction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="af0-mS-VXx">
                                         <rect key="frame" x="0.0" y="0.0" width="77.5" height="20.5"/>
@@ -105,9 +105,20 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="US0-8F-PVE">
+                                        <rect key="frame" x="0.0" y="133" width="40.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-ga-VWN">
+                                        <rect key="frame" x="0.0" y="161.5" width="343" height="216"/>
+                                    </pickerView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="5oU-ga-VWN" secondAttribute="trailing" id="Mf1-p1-XzG"/>
                                     <constraint firstAttribute="trailing" secondItem="Sab-2n-voJ" secondAttribute="trailing" id="dDI-ll-L8x"/>
+                                    <constraint firstItem="5oU-ga-VWN" firstAttribute="leading" secondItem="W5y-fA-Vma" secondAttribute="leading" id="geB-54-DaD"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -134,6 +145,7 @@
                         <outlet property="contentTextField" destination="Sab-2n-voJ" id="vLg-Ia-02h"/>
                         <outlet property="probabilityTextField" destination="bAK-em-UsT" id="0Ot-H4-MBZ"/>
                         <outlet property="saveButton" destination="uI7-R3-1eM" id="OJD-wh-qGE"/>
+                        <outlet property="statePicker" destination="5oU-ga-VWN" id="kAZ-2g-Id2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -139,8 +139,8 @@ class PredictionTableViewController: UITableViewController {
     //MARK: Private Methods
     
     private func loadSamplePredictions() {
-        let prediction1  = Prediction(content: "X will win sport", probability: 70)
-        let prediction2  = Prediction(content: "X will increase in value", probability: 60)
+        let prediction1  = Prediction(content: "X will win sport", probability: 70, state: .pending)
+        let prediction2  = Prediction(content: "X will increase in value", probability: 60, state: .pending)
         
         predictions += [prediction1, prediction2]
     }

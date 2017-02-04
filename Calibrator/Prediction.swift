@@ -15,6 +15,14 @@ class Prediction: NSObject, NSCoding {
     
     var content: String
     var probability: Int
+    var state: State
+
+    enum State : String {
+        case pending = "Pending"
+        case overdue = "Overdue"
+        case correct = "Correct"
+        case incorrect = "Incorrect"
+    }
     
     //MARK: Archiving Paths
     
@@ -28,9 +36,10 @@ class Prediction: NSObject, NSCoding {
         static let probability = "probability"
     }
     
-    init(content: String, probability: Int) {
+    init(content: String, probability: Int, state: State = .pending) {
         self.content = content
         self.probability = probability
+        self.state = state
     }
     
     //MARK: NSCoding
