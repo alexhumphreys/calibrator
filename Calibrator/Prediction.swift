@@ -34,6 +34,7 @@ class Prediction: NSObject, NSCoding {
     struct PropertyKey {
         static let content = "content"
         static let probability = "probability"
+        static let state = "state"
     }
     
     init(content: String, probability: Int, state: State = .pending) {
@@ -46,6 +47,7 @@ class Prediction: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(content, forKey: PropertyKey.content)
         aCoder.encode(probability, forKey: PropertyKey.probability)
+        aCoder.encode(state.rawValue, forKey: PropertyKey.state)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -53,9 +55,14 @@ class Prediction: NSObject, NSCoding {
             os_log("Unable to decode the content for a Prediction object", log: OSLog.default, type: .debug)
             return nil
         }
+        guard let stateString = aDecoder.decodeObject(forKey: PropertyKey.state) as? String else {
+            os_log("Unable to decode the state for a Prediction object", log: OSLog.default, type: .debug)
+            return nil
+        }
+        let state = State(rawValue: stateString)
         
         let probability = aDecoder.decodeInteger(forKey: PropertyKey.probability)
         
-        self.init(content: content, probability: probability)
+        self.init(content: content, probability: probability, state: state!)
     }
 }
