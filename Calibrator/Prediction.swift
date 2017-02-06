@@ -55,14 +55,14 @@ class Prediction: NSObject, NSCoding {
             os_log("Unable to decode the content for a Prediction object", log: OSLog.default, type: .debug)
             return nil
         }
-        guard let stateString = aDecoder.decodeObject(forKey: PropertyKey.state) as? String else {
-            os_log("Unable to decode the state for a Prediction object", log: OSLog.default, type: .debug)
-            return nil
-        }
-        let state = State(rawValue: stateString)
-        
+        let stateString = aDecoder.decodeObject(forKey: PropertyKey.state) as? String
         let probability = aDecoder.decodeInteger(forKey: PropertyKey.probability)
         
-        self.init(content: content, probability: probability, state: state!)
+        if let str = stateString {
+            let state = State(rawValue: str)
+            self.init(content: content, probability: probability, state: state!)
+        } else {
+            self.init(content: content, probability: probability, state: .pending)
+        }
     }
 }
