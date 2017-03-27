@@ -20,7 +20,7 @@ class PredictionTableViewController: UITableViewController {
         
         navigationItem.leftBarButtonItem = editButtonItem
         
-        // Load any saved meals, otherwise load sample data.
+        // Load any saved predictions, otherwise load sample data.
         if let savedPredictions = loadPredictions() {
             predictions += savedPredictions
         } else {
@@ -149,9 +149,9 @@ class PredictionTableViewController: UITableViewController {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(predictions, toFile: Prediction.ArchiveURL.path)
         
         if isSuccessfulSave {
-            os_log("Meals successfully saved.", log: OSLog.default, type: .debug)
+            os_log("Predictions successfully saved.", log: OSLog.default, type: .debug)
         } else {
-            os_log("Failed to save meals...", log: OSLog.default, type: .error)
+            os_log("Failed to save predictions...", log: OSLog.default, type: .error)
         }
     }
     

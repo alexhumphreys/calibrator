@@ -29,6 +29,7 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         // Picker
         self.statePicker.delegate = self
         self.statePicker.dataSource = self
+        contentTextField.delegate = self
         pickerData = [Prediction.State.correct,
                       Prediction.State.incorrect,
                       Prediction.State.overdue,
@@ -40,6 +41,7 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
             probabilityTextField.text = String(prediction.probability)
             self.statePicker.selectRow(pickerData.index(of: prediction.state)!, inComponent: 0, animated: false)
         }
+        updateSaveButtonState()
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,7 +55,12 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        updateSaveButtonState()
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Disable the Save button while editing.
+        saveButton.isEnabled = false
+        updateSaveButtonState()
     }
     //MARK: UIPickerViewDelegate
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -102,5 +109,11 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         prediction = Prediction(content: content!, probability: probability!, state: state)
     }
     
+    //MARK: Private Methods
+    private func updateSaveButtonState() {
+        // Disable the Save button if the text field is empty.
+        let text = contentTextField.text ?? ""
+        saveButton.isEnabled = !text.isEmpty
+    }
 }
 
