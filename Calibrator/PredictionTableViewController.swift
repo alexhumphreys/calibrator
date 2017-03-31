@@ -57,6 +57,7 @@ class PredictionTableViewController: UITableViewController {
         
         cell.contentLabel.text = prediction.content
         cell.probabilityLabel.text = String(prediction.probability)
+        cell.stateLabel.text = String(describing: prediction.state)
         
         return cell
     }

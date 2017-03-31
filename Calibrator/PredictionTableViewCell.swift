@@ -13,6 +13,7 @@ class PredictionTableViewCell: UITableViewCell {
     //Mark: Properties
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var probabilityLabel: UILabel!
+    @IBOutlet weak var stateLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
