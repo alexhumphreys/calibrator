@@ -40,6 +40,7 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         if let prediction = prediction {
             contentTextField.text = prediction.content
             probabilityTextField.text = String(prediction.probability)
+            navigationItem.title = prediction.asTitle()
             self.statePicker.selectRow(pickerData.index(of: prediction.state)!, inComponent: 0, animated: false)
         }
         updateSaveButtonState()

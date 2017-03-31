@@ -17,6 +17,8 @@ class Prediction: NSObject, NSCoding {
     var probability: Int
     var state: State
 
+    let titleLength = 19
+
     enum State : String {
         case pending = "Pending"
         case overdue = "Overdue"
@@ -43,6 +45,15 @@ class Prediction: NSObject, NSCoding {
         self.state = state
     }
     
+    func asTitle() -> String {
+        if self.content.characters.count < titleLength + 3 {
+            return self.content
+        } else {
+            let index = self.content.characters.index(self.content.characters.startIndex, offsetBy: titleLength)
+            return self.content.substring(to: index) + "..."
+        }
+    }
+
     //MARK: NSCoding
     func encode(with aCoder: NSCoder) {
         aCoder.encode(content, forKey: PropertyKey.content)
