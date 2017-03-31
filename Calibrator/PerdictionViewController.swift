@@ -30,10 +30,11 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         self.statePicker.delegate = self
         self.statePicker.dataSource = self
         contentTextField.delegate = self
-        pickerData = [Prediction.State.correct,
-                      Prediction.State.incorrect,
-                      Prediction.State.overdue,
-                      Prediction.State.pending]
+        pickerData = [
+            Prediction.State.pending,
+            Prediction.State.correct,
+            Prediction.State.incorrect,
+            Prediction.State.overdue]
 
         // Set up views if editing an existing Prediction
         if let prediction = prediction {
