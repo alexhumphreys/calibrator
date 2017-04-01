@@ -70,20 +70,6 @@ class PredictionTableViewController: UITableViewController {
     }
     */
 
-/*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            predictions.remove(at: indexPath.row)
-            savePredictions()
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let resolveAction  = UITableViewRowAction(style: .normal, title: "Resolve") { (rowAction, indexPath) in
             print("Share Button tapped. Row item value = \(self.predictions[indexPath.row])")
