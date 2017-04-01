@@ -70,6 +70,7 @@ class PredictionTableViewController: UITableViewController {
     }
     */
 
+/*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -80,6 +81,59 @@ class PredictionTableViewController: UITableViewController {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
+    }
+    */
+
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let resolveAction  = UITableViewRowAction(style: .normal, title: "Resolve") { (rowAction, indexPath) in
+            print("Share Button tapped. Row item value = \(self.predictions[indexPath.row])")
+            self.displayResolveSheet(indexPath: indexPath)
+        }
+        let deleteAction  = UITableViewRowAction(style: .default, title: "Delete") { (rowAction, indexPath) in
+            print("Delete Button tapped. Row item value = \(self.predictions[indexPath.row])")
+            self.predictions.remove(at: indexPath.row)
+            self.savePredictions()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        resolveAction.backgroundColor = UIColor.init(red: 0, green: 1, blue: 0, alpha: 0.49)
+        return [resolveAction,deleteAction]
+    }
+
+
+    func displayResolveSheet(indexPath: IndexPath)
+    {
+        func updateState(prediction: Prediction, state: Prediction.State) {
+            prediction.state = state
+            self.setEditing(false, animated: true)
+        }
+
+        let alertController = UIAlertController(title: "Resolve", message: "Prediction was:", preferredStyle: .actionSheet)
+
+        let correctButton = UIAlertAction(title: "Correct", style: .default, handler: { (action) -> Void in
+            self.predictions[indexPath.row].state = .correct
+            self.savePredictions()
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            self.setEditing(false, animated: true)
+        })
+
+        let incorrectButton = UIAlertAction(title: "Incorrect", style: .default, handler: { (action) -> Void in
+            self.predictions[indexPath.row].state = .incorrect
+            self.savePredictions()
+            self.tableView.reloadData()
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+            self.setEditing(false, animated: true)
+        })
+
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            print("Cancel button tapped")
+            self.setEditing(false, animated: true)
+        })
+
+        alertController.addAction(correctButton)
+        alertController.addAction(incorrectButton)
+        alertController.addAction(cancelButton)
+
+        self.navigationController!.present(alertController, animated: true, completion: nil)
     }
 
     /*
