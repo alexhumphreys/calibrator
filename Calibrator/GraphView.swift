@@ -32,6 +32,7 @@ import UIKit
         
         let context = UIGraphicsGetCurrentContext()
         
+        // TODO: work out how not to double this everyhwere
         let graphHeight = height - topBorder - bottomBorder
 
         // draw the line graph
@@ -100,31 +101,9 @@ import UIKit
             circle.fill()
         }
         
-        //Draw horizontal graph lines on the top of everything
-        var linePath = UIBezierPath()
-        
-        //top line
-        linePath.move(to: CGPoint(x:margin, y: topBorder))
-        linePath.addLine(to: CGPoint(x: width - margin,
-                                     y:topBorder))
-        
-        //center line
-        linePath.move(to: CGPoint(x:margin,
-                                  y: graphHeight/2 + topBorder))
-        linePath.addLine(to: CGPoint(x:width - margin,
-                                     y:graphHeight/2 + topBorder))
-        
-        //bottom line
-        linePath.move(to: CGPoint(x:margin,
-                                  y:height - bottomBorder))
-        linePath.addLine(to: CGPoint(x:width - margin,
-                                     y:height - bottomBorder))
-        let color = UIColor(white: 1.0, alpha: 0.3)
-        color.setStroke()
-        
-        linePath.lineWidth = 1.0
-        linePath.stroke()
-    }
+        drawHorizontalLines(rect: rect)
+    
+ }
     
     func addClip(rect: CGRect, width: Double = 8.0, height: Double = 8.0) {
         //set up background clipping area
@@ -186,6 +165,36 @@ import UIKit
             y = graphHeight + topBorder - y // Flip the graph
             return y
     }
-    
+
+    func drawHorizontalLines(rect: CGRect) {
+        let height = rect.height
+        let width = rect.width
+        let graphHeight = height - topBorder - bottomBorder
+
+        //Draw horizontal graph lines on the top of everything
+        var linePath = UIBezierPath()
+        
+        //top line
+        linePath.move(to: CGPoint(x:margin, y: topBorder))
+        linePath.addLine(to: CGPoint(x: width - margin,
+                                     y:topBorder))
+        
+        //center line
+        linePath.move(to: CGPoint(x:margin,
+                                  y: graphHeight/2 + topBorder))
+        linePath.addLine(to: CGPoint(x:width - margin,
+                                     y:graphHeight/2 + topBorder))
+        
+        //bottom line
+        linePath.move(to: CGPoint(x:margin,
+                                  y:height - bottomBorder))
+        linePath.addLine(to: CGPoint(x:width - margin,
+                                     y:height - bottomBorder))
+        let color = UIColor(white: 1.0, alpha: 0.3)
+        color.setStroke()
+        
+        linePath.lineWidth = 1.0
+        linePath.stroke()
+    }
 
 }
