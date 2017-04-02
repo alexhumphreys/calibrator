@@ -16,6 +16,7 @@
 		FA2F49E71E3E0B1C007265C2 /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F49E61E3E0B1C007265C2 /* Prediction.swift */; };
 		FA2F49E91E3E0E17007265C2 /* PredictionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F49E81E3E0E17007265C2 /* PredictionTableViewCell.swift */; };
 		FA2F49EB1E3E15A3007265C2 /* PredictionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F49EA1E3E15A3007265C2 /* PredictionTableViewController.swift */; };
+		FA9D67931E91080B00A103B9 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D67921E91080B00A103B9 /* GraphView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		FA2F49E61E3E0B1C007265C2 /* Prediction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		FA2F49E81E3E0E17007265C2 /* PredictionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionTableViewCell.swift; sourceTree = "<group>"; };
 		FA2F49EA1E3E15A3007265C2 /* PredictionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionTableViewController.swift; sourceTree = "<group>"; };
+		FA9D67921E91080B00A103B9 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				FA2F49EA1E3E15A3007265C2 /* PredictionTableViewController.swift */,
 				FA2F49E61E3E0B1C007265C2 /* Prediction.swift */,
 				FA2F49CA1E3D5679007265C2 /* Main.storyboard */,
+				FA9D67921E91080B00A103B9 /* GraphView.swift */,
 				FA2F49CD1E3D5679007265C2 /* Assets.xcassets */,
 				FA2F49CF1E3D5679007265C2 /* LaunchScreen.storyboard */,
 				FA2F49D21E3D5679007265C2 /* Info.plist */,
@@ -214,6 +217,7 @@
 				FA2F49C71E3D5679007265C2 /* AppDelegate.swift in Sources */,
 				FA2F49E71E3E0B1C007265C2 /* Prediction.swift in Sources */,
 				FA2F49EB1E3E15A3007265C2 /* PredictionTableViewController.swift in Sources */,
+				FA9D67931E91080B00A103B9 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
