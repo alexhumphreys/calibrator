@@ -88,19 +88,8 @@ import UIKit
         graphPath.lineWidth = 2.0
         graphPath.stroke()
         
-        //Draw the circles on top of graph stroke
-        for i in 0..<graphPoints.count {
-            var point = CGPoint(x:columnXPoint(rect: rect, column: i),
-                                y:columnYPoint(rect: rect, graphPoint: graphPoints[i]))
-            point.x -= 5.0/2
-            point.y -= 5.0/2
-            
-            let circle = UIBezierPath(ovalIn:
-                CGRect(origin: point,
-                       size: CGSize(width: 5.0, height: 5.0)))
-            circle.fill()
-        }
-        
+
+        drawPointCircles(rect: rect)
         drawHorizontalLines(rect: rect)
     
  }
@@ -195,6 +184,21 @@ import UIKit
         
         linePath.lineWidth = 1.0
         linePath.stroke()
+    }
+    
+    func drawPointCircles(rect: CGRect) {
+        //Draw the circles on top of graph stroke
+        for i in 0..<graphPoints.count {
+            var point = CGPoint(x:columnXPoint(rect: rect, column: i),
+                                y:columnYPoint(rect: rect, graphPoint: graphPoints[i]))
+            point.x -= 5.0/2
+            point.y -= 5.0/2
+            
+            let circle = UIBezierPath(ovalIn:
+                CGRect(origin: point,
+                       size: CGSize(width: 5.0, height: 5.0)))
+            circle.fill()
+        }
     }
 
 }
