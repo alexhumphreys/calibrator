@@ -16,7 +16,7 @@ import UIKit
     @IBInspectable let topBorder:CGFloat = 60
     @IBInspectable let bottomBorder:CGFloat = 50
     @IBInspectable let margin:CGFloat = 20.0
-    
+    @IBInspectable let lineWidth:CGFloat = 2.0
     
     //Weekly sample data
     var graphPoints:[Int] = [4, 2, 6, 4, 5, 8, 3]
@@ -39,7 +39,7 @@ import UIKit
 
         //draw the line on top of the clipped gradient
         let graphPath = self.getGraphPath(rect: rect)
-        graphPath.lineWidth = 2.0
+        graphPath.lineWidth = lineWidth
         graphPath.stroke()
 
         // draw graph circles
