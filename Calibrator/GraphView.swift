@@ -9,14 +9,14 @@
 import UIKit
 
 @IBDesignable class GraphView: UIView {
-
+    
     //1 - the properties for the gradient
     @IBInspectable var startColor: UIColor = UIColor.red
     @IBInspectable var endColor: UIColor = UIColor.green
     @IBInspectable let topBorder:CGFloat = 60
     @IBInspectable let bottomBorder:CGFloat = 50
     @IBInspectable let margin:CGFloat = 20.0
-
+    
     
     //Weekly sample data
     var graphPoints:[Int] = [4, 2, 6, 4, 5, 8, 3]
@@ -29,14 +29,14 @@ import UIKit
         // make setting pretty
         addCornerClip(rect: rect)
         addBackground()
-        
+
         // add clipped background gradient under graph line
         let context = UIGraphicsGetCurrentContext()
         context!.saveGState()
         addClipping(rect: rect)
         addClippedBackground(rect: rect, context: context!)
         context!.restoreGState()
-        
+
         //draw the line on top of the clipped gradient
         let graphPath = self.getGraphPath(rect: rect)
         graphPath.lineWidth = 2.0
@@ -44,11 +44,10 @@ import UIKit
 
         // draw graph circles
         drawPointCircles(rect: rect)
-        
+
         // draw graph "grid"
         drawHorizontalLines(rect: rect)
-    
- }
+    }
     
     func getGraphPath(rect: CGRect) -> UIBezierPath {
         let graphPath = UIBezierPath()
@@ -74,11 +73,11 @@ import UIKit
                                 cornerRadii: CGSize(width: width, height: height))
         path.addClip()
     }
-    
+
     func addBackground() {
         //2 - get the current context
         let context = UIGraphicsGetCurrentContext()
-        
+
         //6 - draw the gradient
         let startPoint = CGPoint.zero
         let endPoint = CGPoint(x:0, y:self.bounds.height)
@@ -87,45 +86,45 @@ import UIKit
                                     end: endPoint,
                                     options: [])
     }
-    
+
     func getGradient() -> CGGradient? {
         let colors = [startColor.cgColor, endColor.cgColor]
-        
+
         //3 - set up the color space
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        
+
         //4 - set up the color stops
         let colorLocations:[CGFloat] = [0.0, 1.0]
-        
+
         //5 - create the gradient
         let gradient = CGGradient(colorsSpace: colorSpace,
                                   colors: colors as CFArray,
                                   locations: colorLocations)
-        
+
         return gradient
     }
-    
+
     func columnXPoint(rect: CGRect, column: Int) -> CGFloat {
         let width = rect.width
 
         //Calculate gap between points
         let spacer = (width - margin*2 - 4) /
-                CGFloat((self.graphPoints.count - 1))
+            CGFloat((self.graphPoints.count - 1))
         var x:CGFloat = CGFloat(column) * spacer
         x += margin + 2
         return x
     }
-    
+
     func columnYPoint(rect: CGRect, graphPoint: Int) -> CGFloat {
         // calculate the y point
         let height = rect.height
-        
+
         let graphHeight = height - topBorder - bottomBorder
         let maxValue = graphPoints.max()!
-            var y:CGFloat = CGFloat(graphPoint) /
-                CGFloat(maxValue) * graphHeight
-            y = graphHeight + topBorder - y // Flip the graph
-            return y
+        var y:CGFloat = CGFloat(graphPoint) /
+            CGFloat(maxValue) * graphHeight
+        y = graphHeight + topBorder - y // Flip the graph
+        return y
     }
 
     func drawHorizontalLines(rect: CGRect) {
@@ -135,18 +134,18 @@ import UIKit
 
         //Draw horizontal graph lines on the top of everything
         let linePath = UIBezierPath()
-        
+
         //top line
         linePath.move(to: CGPoint(x:margin, y: topBorder))
         linePath.addLine(to: CGPoint(x: width - margin,
                                      y:topBorder))
-        
+
         //center line
         linePath.move(to: CGPoint(x:margin,
                                   y: graphHeight/2 + topBorder))
         linePath.addLine(to: CGPoint(x:width - margin,
                                      y:graphHeight/2 + topBorder))
-        
+
         //bottom line
         linePath.move(to: CGPoint(x:margin,
                                   y:height - bottomBorder))
@@ -154,11 +153,11 @@ import UIKit
                                      y:height - bottomBorder))
         let color = UIColor(white: 1.0, alpha: 0.3)
         color.setStroke()
-        
+
         linePath.lineWidth = 1.0
         linePath.stroke()
     }
-    
+
     func drawPointCircles(rect: CGRect) {
         //Draw the circles on top of graph stroke
         for i in 0..<graphPoints.count {
@@ -166,18 +165,18 @@ import UIKit
                                 y:columnYPoint(rect: rect, graphPoint: graphPoints[i]))
             point.x -= 5.0/2
             point.y -= 5.0/2
-            
+
             let circle = UIBezierPath(ovalIn:
                 CGRect(origin: point,
                        size: CGSize(width: 5.0, height: 5.0)))
             circle.fill()
         }
     }
-    
+
     func addClipping(rect: CGRect) {
         let clippingPath = getGraphPath(rect: rect)
         let height = rect.height
-        
+
         //3 - add lines to the copied path to complete the clip area
         clippingPath.addLine(to: CGPoint(
             x: columnXPoint(rect: rect, column: graphPoints.count - 1),
@@ -186,11 +185,11 @@ import UIKit
             x:columnXPoint(rect: rect, column: 0),
             y:height))
         clippingPath.close()
-        
+
         //4 - add the clipping path to the context
         clippingPath.addClip()
     }
-    
+
     func addClippedBackground(rect: CGRect, context: CGContext) {
         let highestYPoint = columnYPoint(rect: rect, graphPoint: graphPoints.max()!)
         let startPoint = CGPoint(x:margin, y: highestYPoint)
@@ -201,5 +200,4 @@ import UIKit
                                    end: endPoint,
                                    options: CGGradientDrawingOptions(rawValue: 0))
     }
-
 }
