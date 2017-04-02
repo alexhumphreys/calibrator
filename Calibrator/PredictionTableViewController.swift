@@ -12,7 +12,6 @@ import os.log
 class PredictionTableViewController: UITableViewController {
     
     //MARK: Properties
-    
     var predictions = [Prediction]()
 
     override func viewDidLoad() {
@@ -163,7 +162,7 @@ class PredictionTableViewController: UITableViewController {
     }
 
     //MARK: Actions
-    @IBAction func unwindToMealList(sender: UIStoryboardSegue) {
+    @IBAction func unwindToPredictionList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? PredictionViewController, let prediction = sourceViewController.prediction {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
                 predictions[selectedIndexPath.row] = prediction

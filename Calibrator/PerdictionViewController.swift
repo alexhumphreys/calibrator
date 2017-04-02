@@ -84,9 +84,9 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
     
     //MARK: Navigation
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        let isPresentingInAddMealMode = presentingViewController is UINavigationController
+        let isPresentingInAddPredictionMode = presentingViewController is UINavigationController
         
-        if isPresentingInAddMealMode {
+        if isPresentingInAddPredictionMode {
             dismiss(animated: true, completion: nil)
         } else if let owningNavigationController = navigationController {
             owningNavigationController.popViewController(animated: true)

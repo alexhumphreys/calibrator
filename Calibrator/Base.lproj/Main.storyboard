@@ -145,7 +145,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="uI7-R3-1eM">
                             <connections>
-                                <segue destination="wF2-1e-g3n" kind="unwind" unwindAction="unwindToMealListWithSender:" id="X3R-xs-bJ4"/>
+                                <segue destination="wF2-1e-g3n" kind="unwind" unwindAction="unwindToPredictionListWithSender:" id="X3R-xs-bJ4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
