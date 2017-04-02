@@ -41,18 +41,7 @@ import UIKit
         UIColor.white.setStroke()
         
         //set up the points line
-        var graphPath = UIBezierPath()
-        //go to start of line
-        graphPath.move(to: CGPoint(x:columnXPoint(rect: rect, column: 0),
-                                   y:columnYPoint(rect: rect, graphPoint: graphPoints[0])))
-        
-        //add points for each item in the graphPoints array
-        //at the correct (x, y) for the point
-        for i in 1..<graphPoints.count {
-            let nextPoint = CGPoint(x:columnXPoint(rect: rect, column: i),
-                                    y:columnYPoint(rect: rect, graphPoint: graphPoints[i]))
-            graphPath.addLine(to: nextPoint)
-        }
+        var graphPath = self.getGraphPath(rect: rect)
         
         //Create the clipping path for the graph gradient
         
@@ -93,6 +82,23 @@ import UIKit
         drawHorizontalLines(rect: rect)
     
  }
+    
+    func getGraphPath(rect: CGRect) -> UIBezierPath {
+        var graphPath = UIBezierPath()
+        //go to start of line
+        graphPath.move(to: CGPoint(x:columnXPoint(rect: rect, column: 0),
+                                   y:columnYPoint(rect: rect, graphPoint: graphPoints[0])))
+        
+        //add points for each item in the graphPoints array
+        //at the correct (x, y) for the point
+        for i in 1..<graphPoints.count {
+            let nextPoint = CGPoint(x:columnXPoint(rect: rect, column: i),
+                                    y:columnYPoint(rect: rect, graphPoint: graphPoints[i]))
+            graphPath.addLine(to: nextPoint)
+        }
+
+        return graphPath
+    }
     
     func addClip(rect: CGRect, width: Double = 8.0, height: Double = 8.0) {
         //set up background clipping area
