@@ -27,15 +27,13 @@ import UIKit
         let width = rect.width
         let height = rect.height
         
-        addClip(rect: rect)
+        addCornerClip(rect: rect)
         addBackground()
         
         let context = UIGraphicsGetCurrentContext()
         
         // TODO: work out how not to double this everyhwere
         let graphHeight = height - topBorder - bottomBorder
-
-        // draw the line graph
         
         UIColor.white.setFill()
         UIColor.white.setStroke()
@@ -48,20 +46,7 @@ import UIKit
         //1 - save the state of the context (commented out for now)
         context!.saveGState()
         
-        //2 - make a copy of the path
-        var clippingPath = graphPath.copy() as! UIBezierPath
-        
-        //3 - add lines to the copied path to complete the clip area
-        clippingPath.addLine(to: CGPoint(
-            x: columnXPoint(rect: rect, column: graphPoints.count - 1),
-            y:height))
-        clippingPath.addLine(to: CGPoint(
-            x:columnXPoint(rect: rect, column: 0),
-            y:height))
-        clippingPath.close()
-        
-        //4 - add the clipping path to the context
-        clippingPath.addClip()
+        addClipping(rect: rect)
         
         let highestYPoint = columnYPoint(rect: rect, graphPoint: graphPoints.max()!)
         let startPoint = CGPoint(x:margin, y: highestYPoint)
@@ -76,7 +61,6 @@ import UIKit
         //draw the line on top of the clipped gradient
         graphPath.lineWidth = 2.0
         graphPath.stroke()
-        
 
         drawPointCircles(rect: rect)
         drawHorizontalLines(rect: rect)
@@ -100,7 +84,7 @@ import UIKit
         return graphPath
     }
     
-    func addClip(rect: CGRect, width: Double = 8.0, height: Double = 8.0) {
+    func addCornerClip(rect: CGRect, width: Double = 8.0, height: Double = 8.0) {
         //set up background clipping area
         let path = UIBezierPath(roundedRect: rect,
                                 byRoundingCorners: UIRectCorner.allCorners,
@@ -113,8 +97,8 @@ import UIKit
         let context = UIGraphicsGetCurrentContext()
         
         //6 - draw the gradient
-        var startPoint = CGPoint.zero
-        var endPoint = CGPoint(x:0, y:self.bounds.height)
+        let startPoint = CGPoint.zero
+        let endPoint = CGPoint(x:0, y:self.bounds.height)
         context?.drawLinearGradient(getGradient()!,
                                     start: startPoint,
                                     end: endPoint,
@@ -167,7 +151,7 @@ import UIKit
         let graphHeight = height - topBorder - bottomBorder
 
         //Draw horizontal graph lines on the top of everything
-        var linePath = UIBezierPath()
+        let linePath = UIBezierPath()
         
         //top line
         linePath.move(to: CGPoint(x:margin, y: topBorder))
@@ -205,6 +189,23 @@ import UIKit
                        size: CGSize(width: 5.0, height: 5.0)))
             circle.fill()
         }
+    }
+    
+    func addClipping(rect: CGRect) {
+        let clippingPath = getGraphPath(rect: rect)
+        let height = rect.height
+        
+        //3 - add lines to the copied path to complete the clip area
+        clippingPath.addLine(to: CGPoint(
+            x: columnXPoint(rect: rect, column: graphPoints.count - 1),
+            y:height))
+        clippingPath.addLine(to: CGPoint(
+            x:columnXPoint(rect: rect, column: 0),
+            y:height))
+        clippingPath.close()
+        
+        //4 - add the clipping path to the context
+        clippingPath.addClip()
     }
 
 }
