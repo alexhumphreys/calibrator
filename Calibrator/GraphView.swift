@@ -23,52 +23,35 @@ import UIKit
     var perfectCalibration:[(Int,Int)] = [(0,0), (100,100)]
     
     override func draw(_ rect: CGRect) {
-        
-        let width = rect.width
-        let height = rect.height
-        
-        addCornerClip(rect: rect)
-        addBackground()
-        
-        let context = UIGraphicsGetCurrentContext()
-        
-        // TODO: work out how not to double this everyhwere
-        let graphHeight = height - topBorder - bottomBorder
-        
         UIColor.white.setFill()
         UIColor.white.setStroke()
         
-        //set up the points line
-        var graphPath = self.getGraphPath(rect: rect)
+        // make setting pretty
+        addCornerClip(rect: rect)
+        addBackground()
         
-        //Create the clipping path for the graph gradient
-        
-        //1 - save the state of the context (commented out for now)
+        // add clipped background gradient under graph line
+        let context = UIGraphicsGetCurrentContext()
         context!.saveGState()
-        
         addClipping(rect: rect)
-        
-        let highestYPoint = columnYPoint(rect: rect, graphPoint: graphPoints.max()!)
-        let startPoint = CGPoint(x:margin, y: highestYPoint)
-        let endPoint = CGPoint(x:margin, y:self.bounds.height)
-        
-        context!.drawLinearGradient(getGradient()!,
-                                    start: startPoint,
-                                    end: endPoint,
-                                    options: CGGradientDrawingOptions(rawValue: 0))
+        addClippedBackground(rect: rect, context: context!)
         context!.restoreGState()
         
         //draw the line on top of the clipped gradient
+        let graphPath = self.getGraphPath(rect: rect)
         graphPath.lineWidth = 2.0
         graphPath.stroke()
 
+        // draw graph circles
         drawPointCircles(rect: rect)
+        
+        // draw graph "grid"
         drawHorizontalLines(rect: rect)
     
  }
     
     func getGraphPath(rect: CGRect) -> UIBezierPath {
-        var graphPath = UIBezierPath()
+        let graphPath = UIBezierPath()
         //go to start of line
         graphPath.move(to: CGPoint(x:columnXPoint(rect: rect, column: 0),
                                    y:columnYPoint(rect: rect, graphPoint: graphPoints[0])))
@@ -206,6 +189,17 @@ import UIKit
         
         //4 - add the clipping path to the context
         clippingPath.addClip()
+    }
+    
+    func addClippedBackground(rect: CGRect, context: CGContext) {
+        let highestYPoint = columnYPoint(rect: rect, graphPoint: graphPoints.max()!)
+        let startPoint = CGPoint(x:margin, y: highestYPoint)
+        let endPoint = CGPoint(x:margin, y:self.bounds.height)
+
+        context.drawLinearGradient(getGradient()!,
+                                   start: startPoint,
+                                   end: endPoint,
+                                   options: CGGradientDrawingOptions(rawValue: 0))
     }
 
 }
