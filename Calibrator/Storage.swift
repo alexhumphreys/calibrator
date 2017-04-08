@@ -78,3 +78,49 @@ extension Storage {
 fileprivate extension Notification.Name {
     static let StorageChangedName = Notification.Name(rawValue: "storageChanged")
 }
+
+
+
+extension Prediction {
+//    init?(fromPlist: Dictionary<String:Any>) {
+//
+//    }
+//    var plist: Dictionary<String:Any> {
+//        return [
+//            "content": content,
+//            "prob": probability,
+//
+//        ]
+//    }
+}
+extension PredictionGroup {
+    //    init?(fromPlist: Dictionary<String:Any>) {
+    //
+    //    }
+//    var plist: Array<Dictionary<String:Any>> {
+//        return predictions.map { $0.plist }
+//    }
+}
+extension Storage {
+//    func loadFrom(plist: Array<Dictionary<String:Any>>) {
+//
+//    }
+//    var plist: Array<Dictionary<String:Any>> {
+//
+//    }
+//    func foo() {
+//        var url = FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+//        url.appendPathComponent("predictions.plist")
+//        let data = Data()
+//        try? data.write(to: url)
+//
+//        guard let data2 = Data(contentsOf: url) else { return }
+
+
+//        PropertyListSerialization
+//        open class func data(fromPropertyList plist: Any, format: PropertyListSerialization.PropertyListFormat, options opt: PropertyListSerialization.WriteOptions) throws -> Data
+//        open class func propertyList(from data: Data, options opt: PropertyListSerialization.ReadOptions = [], format: UnsafeMutablePointer<PropertyListSerialization.PropertyListFormat>?) throws -> Any
+
+
+//    }
+}
