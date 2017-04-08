@@ -11,10 +11,10 @@ import os.log
 
 struct Prediction {
     enum State : String {
-        case pending = "Pending"
-        case overdue = "Overdue"
-        case correct = "Correct"
-        case incorrect = "Incorrect"
+        case pending
+        case overdue
+        case correct
+        case incorrect
     }
     var content: String = ""
     var probability: Int = 0
