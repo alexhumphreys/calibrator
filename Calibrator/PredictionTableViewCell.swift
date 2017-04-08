@@ -8,8 +8,11 @@
 
 import UIKit
 
+
+
+
 class PredictionTableViewCell: UITableViewCell {
-    
+
     //Mark: Properties
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var probabilityLabel: UILabel!
@@ -26,4 +29,13 @@ class PredictionTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+
+extension PredictionTableViewCell {
+    func configure(with prediction: Prediction) {
+        contentLabel.text = prediction.content
+        probabilityLabel.text = String(prediction.probability)
+        stateLabel.text = String(describing: prediction.state)
+    }
 }

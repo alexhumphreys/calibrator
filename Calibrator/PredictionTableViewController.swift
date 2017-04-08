@@ -122,19 +122,14 @@ extension PredictionTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Configure the cell...
         let cellIdentifier = "PredictionTableViewCell"
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PredictionTableViewCell else {
-            fatalError("The dequeued cell is not an instance of PredictionTableViewCell.")
-        }
-        
-        let prediction = predictions[indexPath.row]
-        
-        cell.contentLabel.text = prediction.content
-        cell.probabilityLabel.text = String(prediction.probability)
-        cell.stateLabel.text = String(describing: prediction.state)
-        
-        return cell
+        return tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath);
     }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = cell as! PredictionTableViewCell
+        cell.configure(with: predictions[indexPath.row])
+    }
+
 
     /*
     // Override to support conditional editing of the table view.
