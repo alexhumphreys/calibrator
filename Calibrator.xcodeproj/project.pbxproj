@@ -21,6 +21,7 @@
 		FAA7AD7F1E98F742007C24CA /* SegueHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD7E1E98F742007C24CA /* SegueHandlerType.swift */; };
 		FAA7AD811E98FFB4007C24CA /* PredictionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */; };
 		FAA7AD851E9912C1007C24CA /* Dwifft.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD841E9912C1007C24CA /* Dwifft.swift */; };
+		FAA7AD871E993418007C24CA /* PredictionGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD861E993418007C24CA /* PredictionGraphViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		FAA7AD7E1E98F742007C24CA /* SegueHandlerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueHandlerType.swift; sourceTree = "<group>"; };
 		FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionGroup.swift; sourceTree = "<group>"; };
 		FAA7AD841E9912C1007C24CA /* Dwifft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dwifft.swift; sourceTree = "<group>"; };
+		FAA7AD861E993418007C24CA /* PredictionGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionGraphViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				FAA7AD841E9912C1007C24CA /* Dwifft.swift */,
 				FA2F49CA1E3D5679007265C2 /* Main.storyboard */,
 				FA9D67921E91080B00A103B9 /* GraphView.swift */,
+				FAA7AD861E993418007C24CA /* PredictionGraphViewController.swift */,
 				FA2F49CD1E3D5679007265C2 /* Assets.xcassets */,
 				FA2F49CF1E3D5679007265C2 /* LaunchScreen.storyboard */,
 				FA2F49D21E3D5679007265C2 /* Info.plist */,
@@ -228,6 +231,7 @@
 				FAA7AD811E98FFB4007C24CA /* PredictionGroup.swift in Sources */,
 				FAA7AD7D1E957113007C24CA /* Storage.swift in Sources */,
 				FAA7AD851E9912C1007C24CA /* Dwifft.swift in Sources */,
+				FAA7AD871E993418007C24CA /* PredictionGraphViewController.swift in Sources */,
 				FAA7AD7F1E98F742007C24CA /* SegueHandlerType.swift in Sources */,
 				FA2F49C91E3D5679007265C2 /* PerdictionViewController.swift in Sources */,
 				FA2F49C71E3D5679007265C2 /* AppDelegate.swift in Sources */,

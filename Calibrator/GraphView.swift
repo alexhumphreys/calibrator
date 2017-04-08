@@ -19,8 +19,16 @@ import UIKit
     @IBInspectable let lineWidth:CGFloat = 2.0
     
     //Weekly sample data
-    var graphPoints:[Int] = [4, 2, 6, 4, 5, 8, 3]
+    //var graphPoints:[Int] = [4, 2, 6, 4, 5, 8, 3]
     var perfectCalibration:[(Int,Int)] = [(0,0), (100,100)]
+    var predictions: [Prediction] = []
+    var graphPoints:[Int] {
+        get {
+            return predictions.map({
+                $0.probability
+            })
+        }
+    }
 
     override func draw(_ rect: CGRect) {
         UIColor.white.setFill()
@@ -29,6 +37,8 @@ import UIKit
         // make setting pretty
         addCornerClip(rect: rect)
         addBackground()
+
+        guard graphPoints.count > 0 else { return }
 
         // add clipped background gradient under graph line
         let context = UIGraphicsGetCurrentContext()

@@ -16,12 +16,6 @@ class PredictionTableViewController: UITableViewController, SegueHandlerType, St
         case showDetail
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        print("vwa")
-    }
-
     //MARK: Properties
     fileprivate let storage = Storage.sharedStorage
     fileprivate var predictionGroup: PredictionGroup {
@@ -46,11 +40,6 @@ class PredictionTableViewController: UITableViewController, SegueHandlerType, St
         navigationItem.leftBarButtonItem = editButtonItem
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     func storageDidChange(oldStorage: Storage) {
         let d = oldStorage.predictionGroup.predictions.diff(storage.predictionGroup.predictions)
         tableView.update(with: d)
@@ -60,6 +49,11 @@ class PredictionTableViewController: UITableViewController, SegueHandlerType, St
         if let t = storageToken {
             Storage.removeObserver(t)
         }
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 }
 

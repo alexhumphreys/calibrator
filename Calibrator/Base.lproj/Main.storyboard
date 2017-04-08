@@ -87,40 +87,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W5y-fA-Vma">
-                                <rect key="frame" x="16" y="84" width="343" height="379"/>
+                                <rect key="frame" x="16" y="84" width="343" height="377.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prediction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="af0-mS-VXx">
-                                        <rect key="frame" x="0.0" y="0.0" width="78" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="77.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter prediction" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-2n-voJ">
-                                        <rect key="frame" x="0.0" y="29" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="28.5" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Probability" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApL-CW-zOt">
-                                        <rect key="frame" x="0.0" y="67" width="82" height="21"/>
+                                        <rect key="frame" x="0.0" y="66.5" width="81.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="50%" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bAK-em-UsT">
-                                        <rect key="frame" x="0.0" y="96" width="50" height="30"/>
+                                        <rect key="frame" x="0.0" y="95" width="49.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="US0-8F-PVE">
-                                        <rect key="frame" x="0.0" y="134" width="41" height="21"/>
+                                        <rect key="frame" x="0.0" y="133" width="40.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-ga-VWN">
-                                        <rect key="frame" x="0.0" y="163" width="343" height="216"/>
+                                        <rect key="frame" x="0.0" y="161.5" width="343" height="216"/>
                                     </pickerView>
                                 </subviews>
                                 <constraints>
@@ -163,7 +163,7 @@
         <!--Item 2-->
         <scene sceneID="YTi-cG-IVh">
             <objects>
-                <viewController id="4iJ-Sy-lmZ" sceneMemberID="viewController">
+                <viewController id="4iJ-Sy-lmZ" customClass="PredictionGraphViewController" customModule="Calibrator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6vk-pF-zAH"/>
                         <viewControllerLayoutGuide type="bottom" id="G5X-Cd-faj"/>
@@ -188,6 +188,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="w4G-ev-u7D"/>
+                    <connections>
+                        <outlet property="graphView" destination="pNr-qf-zCA" id="OmH-J1-K3h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weV-TU-rgI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -232,6 +235,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DNx-wH-p1m"/>
+        <segue reference="2w6-w5-Rop"/>
     </inferredMetricsTieBreakers>
 </document>
