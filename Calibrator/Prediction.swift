@@ -9,23 +9,34 @@
 import UIKit
 import os.log
 
-class Prediction: NSObject, NSCoding {
-    
-    //MARK: Properties
-    
-    var content: String
-    var probability: Int
-    var state: State
-
-    let titleLength = 19
-
+struct Prediction {
     enum State : String {
         case pending = "Pending"
         case overdue = "Overdue"
         case correct = "Correct"
         case incorrect = "Incorrect"
     }
-    
+    var content: String = ""
+    var probability: Int = 0
+    var state: State = .pending
+    let identifier = Prediction.nextIdentifier()
+}
+
+extension Prediction : Equatable {
+    static func ==(lhs: Prediction, rhs: Prediction) -> Bool {
+        return
+            lhs.content == rhs.content &&
+                lhs.probability == rhs.probability &&
+                lhs.state == rhs.state &&
+                lhs.identifier == rhs.identifier
+    }
+}
+
+
+
+extension Prediction {
+    static let titleLength = 19
+
     //MARK: Archiving Paths
     
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -39,41 +50,18 @@ class Prediction: NSObject, NSCoding {
         static let state = "state"
     }
     
-    init(content: String, probability: Int, state: State = .pending) {
-        self.content = content
-        self.probability = probability
-        self.state = state
-    }
-    
     func asTitle() -> String {
-        if self.content.characters.count < titleLength + 3 {
+        if self.content.characters.count < Prediction.titleLength + 3 {
             return self.content
         } else {
-            let index = self.content.characters.index(self.content.characters.startIndex, offsetBy: titleLength)
+            let index = self.content.characters.index(self.content.characters.startIndex, offsetBy: Prediction.titleLength)
             return self.content.substring(to: index) + "..."
         }
     }
 
-    //MARK: NSCoding
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(content, forKey: PropertyKey.content)
-        aCoder.encode(probability, forKey: PropertyKey.probability)
-        aCoder.encode(state.rawValue, forKey: PropertyKey.state)
-    }
-    
-    required convenience init?(coder aDecoder: NSCoder) {
-        guard let content = aDecoder.decodeObject(forKey: PropertyKey.content) as? String else {
-            os_log("Unable to decode the content for a Prediction object", log: OSLog.default, type: .debug)
-            return nil
-        }
-        let stateString = aDecoder.decodeObject(forKey: PropertyKey.state) as? String
-        let probability = aDecoder.decodeInteger(forKey: PropertyKey.probability)
-        
-        if let str = stateString {
-            let state = State(rawValue: str)
-            self.init(content: content, probability: probability, state: state!)
-        } else {
-            self.init(content: content, probability: probability, state: .pending)
-        }
+    private static var identifier: Int = 0
+    fileprivate static func nextIdentifier() -> Int {
+        identifier += 1
+        return identifier
     }
 }

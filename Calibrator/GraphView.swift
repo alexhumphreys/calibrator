@@ -21,7 +21,7 @@ import UIKit
     //Weekly sample data
     var graphPoints:[Int] = [4, 2, 6, 4, 5, 8, 3]
     var perfectCalibration:[(Int,Int)] = [(0,0), (100,100)]
-    
+
     override func draw(_ rect: CGRect) {
         UIColor.white.setFill()
         UIColor.white.setStroke()

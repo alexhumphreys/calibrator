@@ -11,6 +11,11 @@ import os.log
 
 class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    enum Usage {
+        case add(Prediction)
+        case edit(Prediction)
+        case none
+    }
 
     
     //MARK: Properties
@@ -19,7 +24,26 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var statePicker: UIPickerView!
     
-    var prediction: Prediction?
+    var storage: Storage! = nil
+    var usage: Usage = .none
+    var prediction: Prediction? {
+        get {
+            switch usage {
+            case .add(let p): return p
+            case .edit(let p): return p
+            case .none: return nil
+            }
+        }
+        set {
+            guard let p = newValue else { return }
+            switch usage {
+            case .add: usage = .add(p)
+            case .edit: usage = .edit(p)
+            case .none: break
+            }
+        }
+    }
+
     var pickerData: [Prediction.State] = []
     
     override func viewDidLoad() {
@@ -37,12 +61,10 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
             Prediction.State.overdue]
 
         // Set up views if editing an existing Prediction
-        if let prediction = prediction {
-            contentTextField.text = prediction.content
-            probabilityTextField.text = String(prediction.probability)
-            navigationItem.title = prediction.asTitle()
-            self.statePicker.selectRow(pickerData.index(of: prediction.state)!, inComponent: 0, animated: false)
-        }
+        contentTextField.text = prediction?.content ?? ""
+        probabilityTextField.text = String(prediction?.probability ?? 0)
+        navigationItem.title = prediction?.asTitle() ?? ""
+        self.statePicker.selectRow(pickerData.index(of: prediction?.state ?? .pending)!, inComponent: 0, animated: false)
         updateSaveButtonState()
     }
     
@@ -57,6 +79,12 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
+        guard
+            textField == contentTextField,
+            var p = prediction
+            else { return }
+        p.content = textField.text ?? ""
+        prediction = p
         updateSaveButtonState()
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -84,33 +112,27 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
     
     //MARK: Navigation
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        let isPresentingInAddPredictionMode = presentingViewController is UINavigationController
-        
-        if isPresentingInAddPredictionMode {
-            dismiss(animated: true, completion: nil)
-        } else if let owningNavigationController = navigationController {
-            owningNavigationController.popViewController(animated: true)
-        } else {
-            fatalError("The PredictionViewController is not inside a navigation controller.")
-        }
+        let _ = navigationController?.popViewController(animated: true)
     }
-    
-    // This method lets you configure a view controller before it's presented.
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        guard let button = sender as? UIBarButtonItem, button === saveButton else {
-            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-            return
+
+    @IBAction func saveOrAdd(_ sender: UIBarButtonItem) {
+        contentTextField.resignFirstResponder()
+        switch usage {
+        case .add(let p):
+            var group = storage.predictionGroup
+            group.predictions.append(p)
+            storage.predictionGroup = group
+        case .edit(let p):
+            var group = storage.predictionGroup
+            group.predictions = group.predictions.map {
+                return $0.identifier == p.identifier ? p : $0
+            }
+            storage.predictionGroup = group
+        case .none: break
         }
-        
-        let content = contentTextField.text
-        let probability = Int(probabilityTextField.text!)
-        let state = pickerData[statePicker.selectedRow(inComponent: 0)]
-        
-        prediction = Prediction(content: content!, probability: probability!, state: state)
+        let _ = navigationController?.popViewController(animated: true)
     }
-    
+
     //MARK: Private Methods
     private func updateSaveButtonState() {
         // Disable the Save button if the text field is empty.

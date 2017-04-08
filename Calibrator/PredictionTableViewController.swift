@@ -9,22 +9,41 @@
 import UIKit
 import os.log
 
-class PredictionTableViewController: UITableViewController {
-    
+class PredictionTableViewController: UITableViewController, SegueHandlerType, StorageObserver {
+
+    enum SegueIdentifier: String {
+        case addPredication
+        case showDetail
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        print("vwa")
+    }
+
     //MARK: Properties
-    var predictions = [Prediction]()
+    fileprivate let storage = Storage.sharedStorage
+    fileprivate var predictionGroup: PredictionGroup {
+        get {
+            return storage.predictionGroup
+        }
+    }
+    fileprivate var predictions: [Prediction] {
+        get {
+            return predictionGroup.predictions
+        }
+    }
+
+    private var storageToken : NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        storageToken = storage.add(observer: self)
+        storageDidChange(oldStorage: storage)
+
         navigationItem.leftBarButtonItem = editButtonItem
-        
-        // Load any saved predictions, otherwise load sample data.
-        if let savedPredictions = loadPredictions() {
-            predictions += savedPredictions
-        } else {
-            loadSamplePredictions()
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +51,63 @@ class PredictionTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    func storageDidChange(oldStorage: Storage) {
+        let d = oldStorage.predictionGroup.predictions.diff(storage.predictionGroup.predictions)
+        tableView.update(with: d)
+    }
+
+    deinit {
+        if let t = storageToken {
+            Storage.removeObserver(t)
+        }
+    }
+}
+
+fileprivate extension UITableView {
+    func update(with diffs: Diff<Prediction>) {
+        guard !diffs.results.isEmpty else { return }
+        beginUpdates()
+        insertRows(at: diffs.insertions.map { IndexPath(row: $0.idx, section: 0) }, with: .automatic)
+        deleteRows(at: diffs.deletions.map { IndexPath(row: $0.idx, section: 0) }, with: .automatic)
+        endUpdates()
+    }
+}
+
+
+// MARK: - Navigation
+extension PredictionTableViewController {
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+
+        switch segueIdentifierForSegue(segue) {
+        case .addPredication:
+            guard
+                let destinationVC = segue.destination as? PredictionViewController
+                else {
+                    fatalError("The selected cell is not being displayed by the table")
+            }
+            destinationVC.storage = storage
+            destinationVC.usage = .add(Prediction())
+            os_log("Adding a new prediction.", log: OSLog.default, type: .debug)
+        case .showDetail:
+            guard
+                let destinationVC = segue.destination as? PredictionViewController,
+                let cell = sender as? PredictionTableViewCell,
+                let indexPath = tableView.indexPath(for: cell)
+                else {
+                    fatalError("The selected cell is not being displayed by the table")
+            }
+            destinationVC.storage = storage
+            destinationVC.usage = .edit(predictions[indexPath.row])
+        }
+    }
+}
+
+// MARK: - Table view data source
+extension PredictionTableViewController {
+
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -74,39 +149,53 @@ class PredictionTableViewController: UITableViewController {
             print("Share Button tapped. Row item value = \(self.predictions[indexPath.row])")
             self.displayResolveSheet(indexPath: indexPath)
         }
-        let deleteAction  = UITableViewRowAction(style: .default, title: "Delete") { (rowAction, indexPath) in
-            print("Delete Button tapped. Row item value = \(self.predictions[indexPath.row])")
-            self.predictions.remove(at: indexPath.row)
-            self.savePredictions()
-            tableView.deleteRows(at: [indexPath], with: .fade)
+
+        let deleteAction  = UITableViewRowAction(style: .default, title: "Delete") { [weak self] (rowAction, indexPath) -> Void in
+            guard let vc = self else { return }
+            print("Delete Button tapped. Row item value = \(vc.predictions[indexPath.row])")
+
+            var group = vc.predictionGroup
+            group.predictions.remove(at: indexPath.row)
+            vc.storage.predictionGroup = group
         }
         resolveAction.backgroundColor = UIColor.init(red: 0, green: 1, blue: 0, alpha: 0.49)
         return [resolveAction,deleteAction]
     }
 
 
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+
+}
+
+
+fileprivate extension PredictionTableViewController {
+
     func displayResolveSheet(indexPath: IndexPath)
     {
         func updateState(prediction: Prediction, state: Prediction.State) {
-            prediction.state = state
+//            prediction.state = state
             self.setEditing(false, animated: true)
         }
 
         let alertController = UIAlertController(title: "Resolve", message: "Prediction was:", preferredStyle: .actionSheet)
 
         let correctButton = UIAlertAction(title: "Correct", style: .default, handler: { (action) -> Void in
-            self.predictions[indexPath.row].state = .correct
-            self.savePredictions()
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-            self.setEditing(false, animated: true)
+//            self.predictions[indexPath.row].state = .correct
+//            self.savePredictions()
+//            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+//            self.setEditing(false, animated: true)
         })
 
         let incorrectButton = UIAlertAction(title: "Incorrect", style: .default, handler: { (action) -> Void in
-            self.predictions[indexPath.row].state = .incorrect
-            self.savePredictions()
-            self.tableView.reloadData()
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-            self.setEditing(false, animated: true)
+//            self.predictions[indexPath.row].state = .incorrect
+//            self.savePredictions()
+//            self.tableView.reloadData()
+//            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+//            self.setEditing(false, animated: true)
         })
 
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
@@ -121,81 +210,5 @@ class PredictionTableViewController: UITableViewController {
         self.navigationController!.present(alertController, animated: true, completion: nil)
     }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
-    }
-    */
-
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        switch(segue.identifier ?? "") {
-        case "AddItem":
-            os_log("Adding a new prediction.", log: OSLog.default, type: .debug)
-        case "ShowDetail":
-            guard let predictionDetailViewController = segue.destination as? PredictionViewController else {
-                fatalError("Unexpected destination: \(segue.destination)")
-            }
-            guard let selectedPredictionCell = sender as? PredictionTableViewCell else {
-                fatalError("Unexpected sender: \(sender)")
-            }
-            guard let indexPath = tableView.indexPath(for: selectedPredictionCell) else {
-                fatalError("The selected cell is not being displayed by the table")
-            }
-            
-            let selectedPrediction = predictions[indexPath.row]
-            predictionDetailViewController.prediction = selectedPrediction
-        default:
-            fatalError("Unexpected Segue Identifier; \(segue.identifier)")
-        }
-    }
-
-    //MARK: Actions
-    @IBAction func unwindToPredictionList(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.source as? PredictionViewController, let prediction = sourceViewController.prediction {
-            if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                predictions[selectedIndexPath.row] = prediction
-                tableView.reloadRows(at: [selectedIndexPath], with: .none)
-            } else {
-                let newIndexPath = IndexPath(row: predictions.count, section: 0)
-                predictions.append(prediction)
-                tableView.insertRows(at: [newIndexPath], with: .automatic)
-            }
-            savePredictions()
-        }
-    }
-    
-    //MARK: Private Methods
-    
-    private func loadSamplePredictions() {
-        let prediction1  = Prediction(content: "X will win sport", probability: 70, state: .pending)
-        let prediction2  = Prediction(content: "X will increase in value", probability: 60, state: .pending)
-        
-        predictions += [prediction1, prediction2]
-    }
-    
-    private func savePredictions() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(predictions, toFile: Prediction.ArchiveURL.path)
-        
-        if isSuccessfulSave {
-            os_log("Predictions successfully saved.", log: OSLog.default, type: .debug)
-        } else {
-            os_log("Failed to save predictions...", log: OSLog.default, type: .error)
-        }
-    }
-    
-    private func loadPredictions() -> [Prediction]? {
-        return NSKeyedUnarchiver.unarchiveObject(withFile: Prediction.ArchiveURL.path) as? [Prediction]
-    }
 }

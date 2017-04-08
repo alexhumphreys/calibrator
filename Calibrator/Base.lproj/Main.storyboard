@@ -53,7 +53,7 @@
                                     <outlet property="contentLabel" destination="cbN-Bk-wTe" id="p3R-WC-jKy"/>
                                     <outlet property="probabilityLabel" destination="459-IC-Zxm" id="tPX-kC-rnF"/>
                                     <outlet property="stateLabel" destination="NlD-jv-5gd" id="syi-Es-gXe"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="DNx-wH-p1m"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="showDetail" id="DNx-wH-p1m"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -65,7 +65,7 @@
                     <navigationItem key="navigationItem" title="Your Predictions" id="U6h-7x-ok1">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="TZu-V0-UAF">
                             <connections>
-                                <segue destination="KDy-tY-1Cx" kind="presentation" identifier="AddItem" id="Sra-Uv-SSa"/>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="addPredication" id="2w6-w5-Rop"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -87,40 +87,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W5y-fA-Vma">
-                                <rect key="frame" x="16" y="84" width="343" height="377.5"/>
+                                <rect key="frame" x="16" y="84" width="343" height="379"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prediction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="af0-mS-VXx">
-                                        <rect key="frame" x="0.0" y="0.0" width="77.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="78" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter prediction" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-2n-voJ">
-                                        <rect key="frame" x="0.0" y="28.5" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="29" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Probability" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ApL-CW-zOt">
-                                        <rect key="frame" x="0.0" y="66.5" width="81.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="67" width="82" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="50%" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bAK-em-UsT">
-                                        <rect key="frame" x="0.0" y="95" width="49.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="96" width="50" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="US0-8F-PVE">
-                                        <rect key="frame" x="0.0" y="133" width="40.5" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="134" width="41" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5oU-ga-VWN">
-                                        <rect key="frame" x="0.0" y="161.5" width="343" height="216"/>
+                                        <rect key="frame" x="0.0" y="163" width="343" height="216"/>
                                     </pickerView>
                                 </subviews>
                                 <constraints>
@@ -140,24 +140,23 @@
                     <navigationItem key="navigationItem" title="New Prediction" id="h8I-K4-anf">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8LA-4K-S3a">
                             <connections>
-                                <action selector="cancel:" destination="BYZ-38-t0r" id="sTk-Hp-Rve"/>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="Wow-AD-b6k"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="uI7-R3-1eM">
                             <connections>
-                                <segue destination="wF2-1e-g3n" kind="unwind" unwindAction="unwindToPredictionListWithSender:" id="X3R-xs-bJ4"/>
+                                <action selector="saveOrAdd:" destination="BYZ-38-t0r" id="hLE-xH-t3D"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="contentTextField" destination="Sab-2n-voJ" id="vLg-Ia-02h"/>
                         <outlet property="probabilityTextField" destination="bAK-em-UsT" id="0Ot-H4-MBZ"/>
-                        <outlet property="saveButton" destination="uI7-R3-1eM" id="OJD-wh-qGE"/>
+                        <outlet property="saveButton" destination="uI7-R3-1eM" id="5aH-aD-VJd"/>
                         <outlet property="statePicker" destination="5oU-ga-VWN" id="kAZ-2g-Id2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <exit id="wF2-1e-g3n" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2018.4000000000001" y="138.98050974512745"/>
         </scene>
@@ -192,7 +191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="weV-TU-rgI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1364" y="947"/>
+            <point key="canvasLocation" x="-732" y="899"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ihJ-fG-6T0">
@@ -210,7 +209,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txx-Tg-Fpx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2226" y="130"/>
+            <point key="canvasLocation" x="-2279" y="507"/>
         </scene>
         <!--Item-->
         <scene sceneID="Vcg-y0-R0Z">
@@ -230,24 +229,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ep6-sM-ndj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-732" y="138.98050974512745"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="2v1-Sc-NQU">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KDy-tY-1Cx" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="eJb-Px-yl9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="cAD-tu-ycH"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o12-ju-T0k" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1132" y="482"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

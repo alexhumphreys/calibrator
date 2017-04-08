@@ -17,6 +17,10 @@
 		FA2F49E91E3E0E17007265C2 /* PredictionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F49E81E3E0E17007265C2 /* PredictionTableViewCell.swift */; };
 		FA2F49EB1E3E15A3007265C2 /* PredictionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F49EA1E3E15A3007265C2 /* PredictionTableViewController.swift */; };
 		FA9D67931E91080B00A103B9 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D67921E91080B00A103B9 /* GraphView.swift */; };
+		FAA7AD7D1E957113007C24CA /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD7C1E957113007C24CA /* Storage.swift */; };
+		FAA7AD7F1E98F742007C24CA /* SegueHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD7E1E98F742007C24CA /* SegueHandlerType.swift */; };
+		FAA7AD811E98FFB4007C24CA /* PredictionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */; };
+		FAA7AD851E9912C1007C24CA /* Dwifft.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD841E9912C1007C24CA /* Dwifft.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		FA2F49E81E3E0E17007265C2 /* PredictionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionTableViewCell.swift; sourceTree = "<group>"; };
 		FA2F49EA1E3E15A3007265C2 /* PredictionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionTableViewController.swift; sourceTree = "<group>"; };
 		FA9D67921E91080B00A103B9 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		FAA7AD7C1E957113007C24CA /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		FAA7AD7E1E98F742007C24CA /* SegueHandlerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueHandlerType.swift; sourceTree = "<group>"; };
+		FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionGroup.swift; sourceTree = "<group>"; };
+		FAA7AD841E9912C1007C24CA /* Dwifft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dwifft.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,11 +93,15 @@
 		FA2F49C51E3D5679007265C2 /* Calibrator */ = {
 			isa = PBXGroup;
 			children = (
+				FA2F49E61E3E0B1C007265C2 /* Prediction.swift */,
+				FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */,
+				FAA7AD7C1E957113007C24CA /* Storage.swift */,
+				FAA7AD7E1E98F742007C24CA /* SegueHandlerType.swift */,
 				FA2F49C61E3D5679007265C2 /* AppDelegate.swift */,
 				FA2F49C81E3D5679007265C2 /* PerdictionViewController.swift */,
 				FA2F49E81E3E0E17007265C2 /* PredictionTableViewCell.swift */,
 				FA2F49EA1E3E15A3007265C2 /* PredictionTableViewController.swift */,
-				FA2F49E61E3E0B1C007265C2 /* Prediction.swift */,
+				FAA7AD841E9912C1007C24CA /* Dwifft.swift */,
 				FA2F49CA1E3D5679007265C2 /* Main.storyboard */,
 				FA9D67921E91080B00A103B9 /* GraphView.swift */,
 				FA2F49CD1E3D5679007265C2 /* Assets.xcassets */,
@@ -213,6 +225,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2F49E91E3E0E17007265C2 /* PredictionTableViewCell.swift in Sources */,
+				FAA7AD811E98FFB4007C24CA /* PredictionGroup.swift in Sources */,
+				FAA7AD7D1E957113007C24CA /* Storage.swift in Sources */,
+				FAA7AD851E9912C1007C24CA /* Dwifft.swift in Sources */,
+				FAA7AD7F1E98F742007C24CA /* SegueHandlerType.swift in Sources */,
 				FA2F49C91E3D5679007265C2 /* PerdictionViewController.swift in Sources */,
 				FA2F49C71E3D5679007265C2 /* AppDelegate.swift in Sources */,
 				FA2F49E71E3E0B1C007265C2 /* Prediction.swift in Sources */,
