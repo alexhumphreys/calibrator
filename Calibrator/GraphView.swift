@@ -8,10 +8,6 @@
 
 import UIKit
 
-struct Point {
-    let x: Int
-    let y: Int
-}
 
 @IBDesignable class GraphView: UIView {
     
@@ -34,11 +30,12 @@ struct Point {
             })
         }
     }
-
-    func graphPointsFromPredictions() -> [Point] {
-        return predictions.enumerated().map({ (index, element) -> Point in
-            return Point(x: index, y: element.probability)
+    var line: Line {
+        let s = Size(width: Float(self.bounds.width), height: Float(self.bounds.height))
+        let points = predictions.enumerated().map({ (index, element) -> Point in
+            return Point(x: Float(index), y: Float(element.probability))
         })
+        return Line(points: perfectCalibration, size: s)
     }
 
     override func draw(_ rect: CGRect) {
@@ -59,7 +56,7 @@ struct Point {
         context!.restoreGState()
 
         //draw the line on top of the clipped gradient
-        let graphPath = self.getGraphPath(rect: rect)
+        let graphPath = line.path
         graphPath.lineWidth = lineWidth
         graphPath.stroke()
 
@@ -69,57 +66,6 @@ struct Point {
         // draw graph "grid"
         drawHorizontalLines(rect: rect)
     }
-    
-    func getGraphPath2(rect: CGRect) -> UIBezierPath {
-        let graphPath = UIBezierPath()
-        //go to start of line
-        let x1 = columnXPoint(rect: rect, column: 0),
-        y1 = columnYPoint(rect: rect, graphPoint: graphPoints[0])
-        print (x1, y1)
-
-        graphPath.move(to: CGPoint(x:columnXPoint(rect: rect, column: 0),
-                                   y:columnYPoint(rect: rect, graphPoint: graphPoints[0])))
-        
-        //add points for each item in the graphPoints array
-        //at the correct (x, y) for the point
-        for i in 1..<graphPoints.count {
-            let x2 = columnXPoint(rect: rect, column: i),
-                y2 = columnYPoint(rect: rect, graphPoint: graphPoints[i])
-            let nextPoint = CGPoint(x:x2,
-                                    y:y2)
-            print (x2, y2)
-            graphPath.addLine(to: nextPoint)
-        }
-
-        return graphPath
-    }
-
-    func getGraphPath(rect: CGRect) -> UIBezierPath {
-        var graphPoints = graphPointsFromPredictions()
-        // var graphPoints = perfectCalibration
-        let graphPath = UIBezierPath()
-        //go to start of line
-        let x1 = columnXPoint(rect: rect, column: graphPoints[0].x),
-        y1 = columnYPoint(rect: rect, graphPoint: graphPoints[0].y)
-        print (x1, y1)
-
-        graphPath.move(to: CGPoint(x:x1,
-                                   y:y1))
-
-        //add points for each item in the graphPoints array
-        //at the correct (x, y) for the point
-        for point in graphPoints.dropFirst() {
-            let x = columnXPoint(rect: rect, column: point.x),
-            y = columnYPoint(rect: rect, graphPoint: point.y)
-            let nextPoint = CGPoint(x:x,
-                                    y:y)
-            print (x, y)
-            graphPath.addLine(to: nextPoint)
-        }
-
-        return graphPath
-    }
-
     
     func addCornerClip(rect: CGRect, width: Double = 8.0, height: Double = 8.0) {
         //set up background clipping area
@@ -182,6 +128,13 @@ struct Point {
         return y
     }
 
+    func screenPointFor(point: Point, width: Int, height: Int, maxX: Int, maxY: Int) -> CGPoint {
+        let x = Float(width) * Float(point.x) / Float(maxX)
+        let y = Float(height) - Float(height) * Float(point.y) / Float(maxY)
+
+        return CGPoint(x: Int(x) , y: Int(y))
+    }
+
     func drawHorizontalLines(rect: CGRect) {
         let height = rect.height
         let width = rect.width
@@ -229,7 +182,7 @@ struct Point {
     }
 
     func addClipping(rect: CGRect) {
-        let clippingPath = getGraphPath(rect: rect)
+        let clippingPath = line.path
         let height = rect.height
 
         //3 - add lines to the copied path to complete the clip area

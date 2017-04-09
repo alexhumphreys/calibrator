@@ -17,7 +17,8 @@ class Storage : NSObject {
         var pg = PredictionGroup()
         pg.predictions += [
             Prediction(content: "X will win sport", probability: 70, state: .pending),
-            Prediction(content: "X will increase in value", probability: 60, state: .pending),
+            Prediction(content: "Y will increase in value", probability: 60, state: .pending),
+            Prediction(content: "Z will still be a mess", probability: 80, state: .pending)
         ]
         s.predictionGroup = pg
         return s
