@@ -51,4 +51,14 @@ struct Line {
 
         return CGPoint(x: CGFloat(x) , y: CGFloat(y))
     }
+
+    var pointMarkers: [UIBezierPath] {
+        let markerSize: CGFloat = 5.0/2
+        return screenPoints.map({ (p) -> UIBezierPath in
+            let topLeft = CGPoint(x: p.x - markerSize, y: p.y - markerSize)
+            let bounds = CGRect(origin: topLeft,
+                                size: CGSize(width: 5.0, height: 5.0))
+            return UIBezierPath(ovalIn: bounds)
+        })
+    }
 }

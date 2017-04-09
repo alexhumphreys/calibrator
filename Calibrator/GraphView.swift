@@ -35,7 +35,7 @@ import UIKit
         let points = predictions.enumerated().map({ (index, element) -> Point in
             return Point(x: Float(index), y: Float(element.probability))
         })
-        return Line(points: perfectCalibration, size: s)
+        return Line(points: points, size: s)
     }
 
     override func draw(_ rect: CGRect) {
@@ -66,7 +66,7 @@ import UIKit
         // draw graph "grid"
         drawHorizontalLines(rect: rect)
     }
-    
+
     func addCornerClip(rect: CGRect, width: Double = 8.0, height: Double = 8.0) {
         //set up background clipping area
         let path = UIBezierPath(roundedRect: rect,
@@ -168,16 +168,8 @@ import UIKit
 
     func drawPointCircles(rect: CGRect) {
         //Draw the circles on top of graph stroke
-        for i in 0..<graphPoints.count {
-            var point = CGPoint(x:columnXPoint(rect: rect, column: i),
-                                y:columnYPoint(rect: rect, graphPoint: graphPoints[i]))
-            point.x -= 5.0/2
-            point.y -= 5.0/2
-
-            let circle = UIBezierPath(ovalIn:
-                CGRect(origin: point,
-                       size: CGSize(width: 5.0, height: 5.0)))
-            circle.fill()
+        for m in line.pointMarkers {
+            m.fill()
         }
     }
 
