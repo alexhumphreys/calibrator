@@ -174,20 +174,7 @@ import UIKit
     }
 
     func addClipping(rect: CGRect) {
-        let clippingPath = line.path
-        let height = rect.height
-
-        //3 - add lines to the copied path to complete the clip area
-        clippingPath.addLine(to: CGPoint(
-            x: columnXPoint(rect: rect, column: graphPoints.count - 1),
-            y:height))
-        clippingPath.addLine(to: CGPoint(
-            x:columnXPoint(rect: rect, column: 0),
-            y:height))
-        clippingPath.close()
-
-        //4 - add the clipping path to the context
-        clippingPath.addClip()
+        line.path.addClip()
     }
 
     func addClippedBackground(rect: CGRect, context: CGContext) {
