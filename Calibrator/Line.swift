@@ -15,6 +15,16 @@ struct Point {
 struct Size {
     var width: Float = 0.0
     var height: Float = 0.0
+    let verticalMargin: Float = 20.0
+    let horizontalMargin: Float = 20.0
+
+    var offsetWidth: Float {
+        return width - horizontalMargin * 2
+    }
+
+    var offsetHeight: Float {
+        return height - verticalMargin * 2
+    }
 }
 
 struct Line {
@@ -46,8 +56,8 @@ struct Line {
     }
 
     func screenPointFor(point: Point) -> CGPoint {
-        let x = size.width * point.x / maxX
-        let y = size.height - size.height * point.y / maxY
+        let x = (size.offsetWidth * point.x / maxX) + size.horizontalMargin
+        let y = (size.offsetHeight - size.offsetHeight * point.y / maxY) + size.verticalMargin
 
         return CGPoint(x: CGFloat(x) , y: CGFloat(y))
     }

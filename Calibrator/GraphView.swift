@@ -39,20 +39,20 @@ import UIKit
     }
 
     override func draw(_ rect: CGRect) {
-        UIColor.white.setFill()
-        UIColor.white.setStroke()
+        UIColor.black.setFill()
+        UIColor.black.setStroke()
         
         // make setting pretty
         addCornerClip(rect: rect)
-        addBackground()
+        //addBackground()
 
         guard graphPoints.count > 0 else { return }
 
         // add clipped background gradient under graph line
         let context = UIGraphicsGetCurrentContext()
         context!.saveGState()
-        addClipping(rect: rect)
-        addClippedBackground(rect: rect, context: context!)
+        //addClipping(rect: rect)
+        //addClippedBackground(rect: rect, context: context!)
         context!.restoreGState()
 
         //draw the line on top of the clipped gradient
@@ -64,7 +64,7 @@ import UIKit
         drawPointCircles(rect: rect)
 
         // draw graph "grid"
-        drawHorizontalLines(rect: rect)
+        //drawHorizontalLines(rect: rect)
     }
 
     func addCornerClip(rect: CGRect, width: Double = 8.0, height: Double = 8.0) {
@@ -159,7 +159,7 @@ import UIKit
                                   y:height - bottomBorder))
         linePath.addLine(to: CGPoint(x:width - margin,
                                      y:height - bottomBorder))
-        let color = UIColor(white: 1.0, alpha: 0.3)
+        let color = UIColor.gray
         color.setStroke()
 
         linePath.lineWidth = 1.0
