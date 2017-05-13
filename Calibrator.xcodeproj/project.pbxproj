@@ -101,7 +101,6 @@
 		FA2F49C51E3D5679007265C2 /* Calibrator */ = {
 			isa = PBXGroup;
 			children = (
-				FAA7AD901EC7269D007C24CA /* LineChart.swift */,
 				FA2F49E61E3E0B1C007265C2 /* Prediction.swift */,
 				FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */,
 				FAA7AD7C1E957113007C24CA /* Storage.swift */,
@@ -116,6 +115,7 @@
 				FAA7AD881E9A9E13007C24CA /* Line.swift */,
 				FAA7AD861E993418007C24CA /* PredictionGraphViewController.swift */,
 				FAA7AD8E1EC72651007C24CA /* LineChartViewController.swift */,
+				FAA7AD901EC7269D007C24CA /* LineChart.swift */,
 				FA2F49CD1E3D5679007265C2 /* Assets.xcassets */,
 				FA2F49CF1E3D5679007265C2 /* LaunchScreen.storyboard */,
 				FA2F49D21E3D5679007265C2 /* Info.plist */,

@@ -8,14 +8,40 @@
 
 import UIKit
 
-class LineChartViewController: UIViewController, LineChartDelegate {
+class LineChartViewController: UIViewController, LineChartDelegate, StorageObserver {
     var label = UILabel()
     var lineChart: LineChart!
 
+    fileprivate let storage = Storage.sharedStorage
+    fileprivate var predictionGroup: PredictionGroup {
+        get {
+            return storage.predictionGroup
+        }
+    }
+    fileprivate var predictions: [Prediction] {
+        get {
+            return predictionGroup.predictions
+        }
+    }
+    private var storageToken : NSObjectProtocol?
+    func storageDidChange(oldStorage: Storage) {
+        let _ = oldStorage.predictionGroup.predictions.diff(storage.predictionGroup.predictions)
+        //self.graphView.predictions = predictions
+        self.view.setNeedsDisplay()
+    }
+
+    deinit {
+        if let t = storageToken {
+            Storage.removeObserver(t)
+        }
+    }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        storageToken = storage.add(observer: self)
+        storageDidChange(oldStorage: storage)
 
         var views: [String: AnyObject] = [:]
 
