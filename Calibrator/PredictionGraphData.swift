@@ -11,9 +11,17 @@ import Foundation
 struct PredictionGraphData {
     let predictionGroup: PredictionGroup
 
-    var linePoints: [Int] {
-        return predictionGroup.resolved.predictions.map({ (p) -> Int in
+    var probabilities: [Int] {
+        let probs = predictionGroup.resolved.predictions.map({ (p) -> Int in
             return p.probability
+        })
+        let uniqProbs = Array(Set(probs))
+        return uniqProbs.sorted()
+    }
+
+    var linePoints: [Point] {
+        return probabilities.map({ (p) -> Point in
+            Point.init(x: Float(p), y: accuracy(at: p))
         })
     }
 
@@ -24,8 +32,10 @@ struct PredictionGraphData {
             predictions: predictionGroup.resolved.predictions.filter({$0.probability == at}))
 
         let correctCount = Float(pg.select(state: .correct).predictions.count)
-        let incorrectCount = Float(pg.select(state: .incorrect).predictions.count)
+        //let incorrectCount = Float(pg.select(state: .incorrect).predictions.count)
 
+
+        // TODO: zero count?
         return correctCount / Float(pg.predictions.count)
     }
 }

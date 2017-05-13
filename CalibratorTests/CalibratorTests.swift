@@ -42,7 +42,9 @@ class CalibratorTests: XCTestCase {
         let pgd = PredictionGraphData.init(predictionGroup: predictionGroup)
 
         print(pgd.accuracy(at: 50))
-
+        print(pgd.probabilities)
+        print(pgd.linePoints)
+        
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
