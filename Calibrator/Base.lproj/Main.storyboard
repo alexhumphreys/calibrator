@@ -196,6 +196,25 @@
             </objects>
             <point key="canvasLocation" x="-732" y="899"/>
         </scene>
+        <!--Item 3-->
+        <scene sceneID="RRS-bX-39g">
+            <objects>
+                <viewController id="SUX-hW-IDx" userLabel="Item 3" customClass="LineChartViewController" customModule="Calibrator" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kHR-Ik-cBN"/>
+                        <viewControllerLayoutGuide type="bottom" id="cxU-kn-eDy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ztV-cB-vjs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 3" id="adT-Gh-Cc6" userLabel="Item 3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ffo-OJ-ddk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-732" y="1898"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ihJ-fG-6T0">
             <objects>
@@ -208,11 +227,12 @@
                     <connections>
                         <segue destination="5NI-zc-fUh" kind="relationship" relationship="viewControllers" id="iPy-FF-OXP"/>
                         <segue destination="4iJ-Sy-lmZ" kind="relationship" relationship="viewControllers" id="rzr-nM-gwx"/>
+                        <segue destination="SUX-hW-IDx" kind="relationship" relationship="viewControllers" id="KXO-j8-vIH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txx-Tg-Fpx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2279" y="507"/>
+            <point key="canvasLocation" x="-2473" y="557"/>
         </scene>
         <!--Item-->
         <scene sceneID="Vcg-y0-R0Z">
