@@ -16,13 +16,13 @@
 		FA2F49E71E3E0B1C007265C2 /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F49E61E3E0B1C007265C2 /* Prediction.swift */; };
 		FA2F49E91E3E0E17007265C2 /* PredictionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F49E81E3E0E17007265C2 /* PredictionTableViewCell.swift */; };
 		FA2F49EB1E3E15A3007265C2 /* PredictionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2F49EA1E3E15A3007265C2 /* PredictionTableViewController.swift */; };
-		FA9D67931E91080B00A103B9 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9D67921E91080B00A103B9 /* GraphView.swift */; };
 		FAA7AD7D1E957113007C24CA /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD7C1E957113007C24CA /* Storage.swift */; };
 		FAA7AD7F1E98F742007C24CA /* SegueHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD7E1E98F742007C24CA /* SegueHandlerType.swift */; };
 		FAA7AD811E98FFB4007C24CA /* PredictionGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */; };
 		FAA7AD851E9912C1007C24CA /* Dwifft.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD841E9912C1007C24CA /* Dwifft.swift */; };
-		FAA7AD871E993418007C24CA /* PredictionGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD861E993418007C24CA /* PredictionGraphViewController.swift */; };
-		FAA7AD891E9A9E13007C24CA /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD881E9A9E13007C24CA /* Line.swift */; };
+		FAA7AD8F1EC72651007C24CA /* LineChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD8E1EC72651007C24CA /* LineChartViewController.swift */; };
+		FAA7AD911EC7269D007C24CA /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD901EC7269D007C24CA /* LineChart.swift */; };
+		FAA7AD931EC77E28007C24CA /* PredictionGraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD921EC77E28007C24CA /* PredictionGraphData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,13 +49,13 @@
 		FA2F49E61E3E0B1C007265C2 /* Prediction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
 		FA2F49E81E3E0E17007265C2 /* PredictionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionTableViewCell.swift; sourceTree = "<group>"; };
 		FA2F49EA1E3E15A3007265C2 /* PredictionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionTableViewController.swift; sourceTree = "<group>"; };
-		FA9D67921E91080B00A103B9 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		FAA7AD7C1E957113007C24CA /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		FAA7AD7E1E98F742007C24CA /* SegueHandlerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueHandlerType.swift; sourceTree = "<group>"; };
 		FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionGroup.swift; sourceTree = "<group>"; };
 		FAA7AD841E9912C1007C24CA /* Dwifft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dwifft.swift; sourceTree = "<group>"; };
-		FAA7AD861E993418007C24CA /* PredictionGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionGraphViewController.swift; sourceTree = "<group>"; };
-		FAA7AD881E9A9E13007C24CA /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		FAA7AD8E1EC72651007C24CA /* LineChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartViewController.swift; sourceTree = "<group>"; };
+		FAA7AD901EC7269D007C24CA /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
+		FAA7AD921EC77E28007C24CA /* PredictionGraphData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionGraphData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				FA2F49E61E3E0B1C007265C2 /* Prediction.swift */,
+				FAA7AD921EC77E28007C24CA /* PredictionGraphData.swift */,
 				FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */,
 				FAA7AD7C1E957113007C24CA /* Storage.swift */,
 				FAA7AD7E1E98F742007C24CA /* SegueHandlerType.swift */,
@@ -107,9 +108,8 @@
 				FA2F49EA1E3E15A3007265C2 /* PredictionTableViewController.swift */,
 				FAA7AD841E9912C1007C24CA /* Dwifft.swift */,
 				FA2F49CA1E3D5679007265C2 /* Main.storyboard */,
-				FA9D67921E91080B00A103B9 /* GraphView.swift */,
-				FAA7AD881E9A9E13007C24CA /* Line.swift */,
-				FAA7AD861E993418007C24CA /* PredictionGraphViewController.swift */,
+				FAA7AD8E1EC72651007C24CA /* LineChartViewController.swift */,
+				FAA7AD901EC7269D007C24CA /* LineChart.swift */,
 				FA2F49CD1E3D5679007265C2 /* Assets.xcassets */,
 				FA2F49CF1E3D5679007265C2 /* LaunchScreen.storyboard */,
 				FA2F49D21E3D5679007265C2 /* Info.plist */,
@@ -234,14 +234,14 @@
 				FAA7AD811E98FFB4007C24CA /* PredictionGroup.swift in Sources */,
 				FAA7AD7D1E957113007C24CA /* Storage.swift in Sources */,
 				FAA7AD851E9912C1007C24CA /* Dwifft.swift in Sources */,
-				FAA7AD871E993418007C24CA /* PredictionGraphViewController.swift in Sources */,
+				FAA7AD911EC7269D007C24CA /* LineChart.swift in Sources */,
+				FAA7AD8F1EC72651007C24CA /* LineChartViewController.swift in Sources */,
 				FAA7AD7F1E98F742007C24CA /* SegueHandlerType.swift in Sources */,
 				FA2F49C91E3D5679007265C2 /* PerdictionViewController.swift in Sources */,
 				FA2F49C71E3D5679007265C2 /* AppDelegate.swift in Sources */,
+				FAA7AD931EC77E28007C24CA /* PredictionGraphData.swift in Sources */,
 				FA2F49E71E3E0B1C007265C2 /* Prediction.swift in Sources */,
-				FAA7AD891E9A9E13007C24CA /* Line.swift in Sources */,
 				FA2F49EB1E3E15A3007265C2 /* PredictionTableViewController.swift in Sources */,
-				FA9D67931E91080B00A103B9 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
