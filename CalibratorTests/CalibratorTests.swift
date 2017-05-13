@@ -34,7 +34,7 @@ class CalibratorTests: XCTestCase {
     func testExample() {
         let predictionGroup = PredictionGroup.init(predictions: randomPredictions())
 
-        for p in predictionGroup.predictions {
+        for p in predictionGroup.resolvedPredictions {
             print(p.probability)
             print(p.state)
         }

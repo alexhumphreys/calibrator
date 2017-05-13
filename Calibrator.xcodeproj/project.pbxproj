@@ -25,6 +25,7 @@
 		FAA7AD891E9A9E13007C24CA /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD881E9A9E13007C24CA /* Line.swift */; };
 		FAA7AD8F1EC72651007C24CA /* LineChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD8E1EC72651007C24CA /* LineChartViewController.swift */; };
 		FAA7AD911EC7269D007C24CA /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD901EC7269D007C24CA /* LineChart.swift */; };
+		FAA7AD931EC77E28007C24CA /* PredictionGraphData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7AD921EC77E28007C24CA /* PredictionGraphData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		FAA7AD881E9A9E13007C24CA /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		FAA7AD8E1EC72651007C24CA /* LineChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartViewController.swift; sourceTree = "<group>"; };
 		FAA7AD901EC7269D007C24CA /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
+		FAA7AD921EC77E28007C24CA /* PredictionGraphData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictionGraphData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				FA2F49E61E3E0B1C007265C2 /* Prediction.swift */,
+				FAA7AD921EC77E28007C24CA /* PredictionGraphData.swift */,
 				FAA7AD801E98FFB4007C24CA /* PredictionGroup.swift */,
 				FAA7AD7C1E957113007C24CA /* Storage.swift */,
 				FAA7AD7E1E98F742007C24CA /* SegueHandlerType.swift */,
@@ -246,6 +249,7 @@
 				FAA7AD7F1E98F742007C24CA /* SegueHandlerType.swift in Sources */,
 				FA2F49C91E3D5679007265C2 /* PerdictionViewController.swift in Sources */,
 				FA2F49C71E3D5679007265C2 /* AppDelegate.swift in Sources */,
+				FAA7AD931EC77E28007C24CA /* PredictionGraphData.swift in Sources */,
 				FA2F49E71E3E0B1C007265C2 /* Prediction.swift in Sources */,
 				FAA7AD891E9A9E13007C24CA /* Line.swift in Sources */,
 				FA2F49EB1E3E15A3007265C2 /* PredictionTableViewController.swift in Sources */,

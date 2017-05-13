@@ -11,4 +11,8 @@ import Foundation
 
 struct PredictionGroup {
     var predictions: [Prediction] = []
+
+    var resolvedPredictions: [Prediction] {
+        return predictions.filter({$0.state == .correct || $0.state == .incorrect})
+    }
 }
