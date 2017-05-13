@@ -36,9 +36,10 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         }
     }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let pgd = PredictionGraphData.init(predictionGroup: predictionGroup)
 
         storageToken = storage.add(observer: self)
         storageDidChange(oldStorage: storage)
@@ -54,11 +55,15 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-80-[label]", options: [], metrics: nil, views: views))
 
         // simple arrays
-        let data: [CGFloat] = [3, 4, -2, 11, 13, 15]
-        let data2: [CGFloat] = [1, 3, 5, 13, 17, 20]
+        //let data: [CGFloat] = [3, 4, -2, 11, 13, 15]
+        //let data2: [CGFloat] = [1, 3, 5, 13, 17, 20]
+        let data = pgd.lineYPoints
 
         // simple line with custom x axis labels
-        let xLabels: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        //let xLabels: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        let xLabels = pgd.lineXPoints.map({ (x) -> String in
+            return String(describing: x)
+        })
 
         lineChart = LineChart()
         lineChart.animation.enabled = true
@@ -69,7 +74,7 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         lineChart.x.labels.values = xLabels
         lineChart.y.labels.visible = true
         lineChart.addLine(data)
-        lineChart.addLine(data2)
+        //lineChart.addLine(data2)
 
         lineChart.translatesAutoresizingMaskIntoConstraints = false
         lineChart.delegate = self

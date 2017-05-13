@@ -6,7 +6,7 @@
 //  Copyright © 2017 Alex Humphreys. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct PredictionGraphData {
     let predictionGroup: PredictionGroup
@@ -25,6 +25,18 @@ struct PredictionGraphData {
         })
     }
 
+    var lineXPoints: [CGFloat] {
+        return linePoints.map({ (p) -> CGFloat in
+            CGFloat(p.x)
+        })
+    }
+
+    var lineYPoints: [CGFloat] {
+        return linePoints.map({ (p) -> CGFloat in
+            CGFloat(p.y)
+        })
+    }
+
     func accuracy(at: Int) -> Float {
         // TODO: Make nicer
 
@@ -36,6 +48,6 @@ struct PredictionGraphData {
 
 
         // TODO: zero count?
-        return correctCount / Float(pg.predictions.count)
+        return (correctCount / Float(pg.predictions.count) * 100)
     }
 }

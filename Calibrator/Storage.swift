@@ -8,7 +8,15 @@
 
 import Foundation
 
-
+fileprivate func randomPredictions() -> [Prediction] {
+    let predictions: [Prediction] = (0...100).map({ (i) -> Prediction in
+        let prob = Int(50 + (arc4random_uniform(11)*5))
+        return Prediction.init(content: UUID().uuidString,
+                               probability: prob,
+                               state: Prediction.State.randomState())
+    })
+    return predictions
+}
 
 
 class Storage : NSObject {
@@ -20,6 +28,7 @@ class Storage : NSObject {
             Prediction(content: "Y will increase in value", probability: 60, state: .pending),
             Prediction(content: "Z will still be a mess", probability: 80, state: .pending)
         ]
+        pg.predictions += randomPredictions()
         s.predictionGroup = pg
         return s
     }()
