@@ -57,7 +57,9 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         // simple arrays
         //let data: [CGFloat] = [3, 4, -2, 11, 13, 15]
         //let data2: [CGFloat] = [1, 3, 5, 13, 17, 20]
+
         let data = pgd.lineYPoints
+        let data2: [CGFloat] = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
 
         // simple line with custom x axis labels
         //let xLabels: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
@@ -74,7 +76,7 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         lineChart.x.labels.values = xLabels
         lineChart.y.labels.visible = true
         lineChart.addLine(data)
-        //lineChart.addLine(data2)
+        lineChart.addLine(data2)
 
         lineChart.translatesAutoresizingMaskIntoConstraints = false
         lineChart.delegate = self
