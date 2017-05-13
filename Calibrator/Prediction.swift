@@ -15,7 +15,15 @@ struct Prediction {
         case overdue
         case correct
         case incorrect
+
+        static func randomState() -> State {
+            let states: [State] = [.pending, .overdue, .correct, .incorrect]
+            // pick and return a new value
+            let rand = Int(arc4random_uniform(UInt32(states.count)))
+            return states[rand]
+        }
     }
+
     var content: String = ""
     var probability: Int = 0
     var state: State = .pending
