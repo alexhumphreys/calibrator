@@ -160,42 +160,6 @@
             </objects>
             <point key="canvasLocation" x="2018.4000000000001" y="138.98050974512745"/>
         </scene>
-        <!--Item 2-->
-        <scene sceneID="YTi-cG-IVh">
-            <objects>
-                <viewController id="4iJ-Sy-lmZ" customClass="PredictionGraphViewController" customModule="Calibrator" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6vk-pF-zAH"/>
-                        <viewControllerLayoutGuide type="bottom" id="G5X-Cd-faj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QqR-Ek-ZYs">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNr-qf-zCA" customClass="GraphView" customModule="Calibrator" customModuleProvider="target">
-                                <rect key="frame" x="62" y="208" width="250" height="250"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="G2q-cm-zfa"/>
-                                    <constraint firstAttribute="width" constant="250" id="pP9-gy-jk2"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="pNr-qf-zCA" firstAttribute="centerY" secondItem="QqR-Ek-ZYs" secondAttribute="centerY" id="uF8-NO-avx"/>
-                            <constraint firstItem="pNr-qf-zCA" firstAttribute="centerX" secondItem="QqR-Ek-ZYs" secondAttribute="centerX" id="yjK-vs-qFs"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="w4G-ev-u7D"/>
-                    <connections>
-                        <outlet property="graphView" destination="pNr-qf-zCA" id="OmH-J1-K3h"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="weV-TU-rgI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-732" y="899"/>
-        </scene>
         <!--Item 3-->
         <scene sceneID="RRS-bX-39g">
             <objects>
@@ -226,7 +190,6 @@
                     </tabBar>
                     <connections>
                         <segue destination="5NI-zc-fUh" kind="relationship" relationship="viewControllers" id="iPy-FF-OXP"/>
-                        <segue destination="4iJ-Sy-lmZ" kind="relationship" relationship="viewControllers" id="rzr-nM-gwx"/>
                         <segue destination="SUX-hW-IDx" kind="relationship" relationship="viewControllers" id="KXO-j8-vIH"/>
                     </connections>
                 </tabBarController>

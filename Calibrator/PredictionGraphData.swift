@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct Point {
+    var x: Float = 0.0
+    var y: Float = 0.0
+}
+
 struct PredictionGraphData {
     let predictionGroup: PredictionGroup
 
