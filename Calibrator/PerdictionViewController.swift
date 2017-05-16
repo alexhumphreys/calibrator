@@ -53,7 +53,10 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         // Picker
         self.statePicker.delegate = self
         self.statePicker.dataSource = self
+
         contentTextField.delegate = self
+        probabilityTextField.delegate = self
+
         pickerData = [
             Prediction.State.pending,
             Prediction.State.correct,
@@ -80,10 +83,13 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard
-            textField == contentTextField,
+            contentTextField == contentTextField,
+            probabilityTextField == probabilityTextField,
             var p = prediction
             else { return }
-        p.content = textField.text ?? ""
+        let probValue = Int(probabilityTextField.text ?? "")
+        p.content = contentTextField.text ?? ""
+        p.probability = probValue ?? 50
         prediction = p
         updateSaveButtonState()
     }
@@ -117,6 +123,7 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
 
     @IBAction func saveOrAdd(_ sender: UIBarButtonItem) {
         contentTextField.resignFirstResponder()
+        probabilityTextField.resignFirstResponder()
         switch usage {
         case .add(let p):
             var group = storage.predictionGroup
@@ -124,9 +131,10 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
             storage.predictionGroup = group
         case .edit(let p):
             var group = storage.predictionGroup
-            group.predictions = group.predictions.map {
-                return $0.identifier == p.identifier ? p : $0
-            }
+            let newPredictions = group.predictions.map({ (prediction) -> Prediction in
+                return prediction.identifier == p.identifier ? p : prediction
+            })
+            group.predictions = newPredictions
             storage.predictionGroup = group
         case .none: break
         }

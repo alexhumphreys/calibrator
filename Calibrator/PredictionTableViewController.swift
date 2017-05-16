@@ -173,18 +173,17 @@ fileprivate extension PredictionTableViewController {
         let alertController = UIAlertController(title: "Resolve", message: "Prediction was:", preferredStyle: .actionSheet)
 
         let correctButton = UIAlertAction(title: "Correct", style: .default, handler: { (action) -> Void in
-//            self.predictions[indexPath.row].state = .correct
-//            self.savePredictions()
-//            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-//            self.setEditing(false, animated: true)
+            var group = self.predictionGroup
+            group.predictions[indexPath.row].state = .correct
+            self.storage.predictionGroup = group
+            self.setEditing(false, animated: true)
         })
 
         let incorrectButton = UIAlertAction(title: "Incorrect", style: .default, handler: { (action) -> Void in
-//            self.predictions[indexPath.row].state = .incorrect
-//            self.savePredictions()
-//            self.tableView.reloadData()
-//            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-//            self.setEditing(false, animated: true)
+            var group = self.predictionGroup
+            group.predictions[indexPath.row].state = .incorrect
+            self.storage.predictionGroup = group
+            self.setEditing(false, animated: true)
         })
 
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in

@@ -28,7 +28,7 @@ class Storage : NSObject {
             Prediction(content: "Y will increase in value", probability: 60, state: .pending),
             Prediction(content: "Z will still be a mess", probability: 80, state: .pending)
         ]
-        pg.predictions += randomPredictions()
+        //pg.predictions += randomPredictions()
         s.predictionGroup = pg
         return s
     }()
