@@ -10,7 +10,7 @@ import UIKit
 
 class LineChartViewController: UIViewController, LineChartDelegate, StorageObserver {
     var label = UILabel()
-    var lineChart: LineChart!
+    var lineChart = LineChart()
 
     fileprivate let storage = Storage.sharedStorage
     fileprivate var predictionGroup: PredictionGroup {
@@ -26,8 +26,12 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
     private var storageToken : NSObjectProtocol?
     func storageDidChange(oldStorage: Storage) {
         let _ = oldStorage.predictionGroup.predictions.diff(storage.predictionGroup.predictions)
-        //self.graphView.predictions = predictions
+        lineChart.clearAll()
+        addData()
         self.view.setNeedsDisplay()
+        for sv in self.view.subviews {
+            sv.setNeedsDisplay()
+        }
     }
 
     deinit {
@@ -54,29 +58,7 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|", options: [], metrics: nil, views: views))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-80-[label]", options: [], metrics: nil, views: views))
 
-        // simple arrays
-        //let data: [CGFloat] = [3, 4, -2, 11, 13, 15]
-        //let data2: [CGFloat] = [1, 3, 5, 13, 17, 20]
-
-        let data = pgd.lineYPoints
-        let data2: [CGFloat] = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
-
-        // simple line with custom x axis labels
-        //let xLabels: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        let xLabels = pgd.lineXPoints.map({ (x) -> String in
-            return String(describing: x)
-        })
-
-        lineChart = LineChart()
-        lineChart.animation.enabled = true
-        lineChart.area = true
-        lineChart.x.labels.visible = true
-        lineChart.x.grid.count = 5
-        lineChart.y.grid.count = 5
-        lineChart.x.labels.values = xLabels
-        lineChart.y.labels.visible = true
-        lineChart.addLine(data)
-        lineChart.addLine(data2)
+        addData()
 
         lineChart.translatesAutoresizingMaskIntoConstraints = false
         lineChart.delegate = self
@@ -101,7 +83,36 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
 
     }
 
+    func addData() {
+        let pgd = PredictionGraphData.init(predictionGroup: predictionGroup)
 
+        let data = pgd.lineYPoints
+        //let data2: [CGFloat] = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+        let data2 = pgd.probabilities.map({ (x) -> CGFloat in
+            return CGFloat(x)
+        })
+
+        if data.count < 2 {
+            return
+        }
+
+        // simple line with custom x axis labels
+        //let xLabels: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+        let xLabels = data2.map({ (x) -> String in
+            return String(describing: Int(x))
+        })
+
+        lineChart.animation.enabled = true
+        lineChart.area = true
+        lineChart.x.labels.visible = true
+        lineChart.x.grid.count = 5
+        lineChart.y.grid.count = 5
+        lineChart.x.labels.values = xLabels
+        lineChart.y.labels.visible = true
+        if data.count > 0 { lineChart.addLine(data) }
+        lineChart.addLine(data2)
+
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -122,8 +133,8 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
      * Redraw chart on device rotation.
      */
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        if let chart = lineChart {
-            chart.setNeedsDisplay()
-        }
+        //if let chart = lineChart {
+            //chart.setNeedsDisplay()
+        //}
     }
 }
