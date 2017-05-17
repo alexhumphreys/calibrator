@@ -59,12 +59,15 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         //let data2: [CGFloat] = [1, 3, 5, 13, 17, 20]
 
         let data = pgd.lineYPoints
-        let data2: [CGFloat] = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+        //let data2: [CGFloat] = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+        let data2 = pgd.probabilities.map({ (x) -> CGFloat in
+            return CGFloat(x)
+        })
 
         // simple line with custom x axis labels
         //let xLabels: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        let xLabels = pgd.lineXPoints.map({ (x) -> String in
-            return String(describing: x)
+        let xLabels = data2.map({ (x) -> String in
+            return String(describing: Int(x))
         })
 
         lineChart = LineChart()
@@ -75,7 +78,7 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         lineChart.y.grid.count = 5
         lineChart.x.labels.values = xLabels
         lineChart.y.labels.visible = true
-        lineChart.addLine(data)
+        if data.count > 0 { lineChart.addLine(data) }
         lineChart.addLine(data2)
 
         lineChart.translatesAutoresizingMaskIntoConstraints = false
