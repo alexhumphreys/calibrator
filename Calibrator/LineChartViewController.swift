@@ -43,10 +43,14 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let pgd = PredictionGraphData.init(predictionGroup: predictionGroup)
-
         storageToken = storage.add(observer: self)
         storageDidChange(oldStorage: storage)
+
+        addData()
+    }
+
+    func addData() {
+        let pgd = PredictionGraphData.init(predictionGroup: predictionGroup)
 
         var views: [String: AnyObject] = [:]
 
@@ -57,34 +61,6 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         views["label"] = label
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]-|", options: [], metrics: nil, views: views))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-80-[label]", options: [], metrics: nil, views: views))
-
-        addData()
-
-        lineChart.translatesAutoresizingMaskIntoConstraints = false
-        lineChart.delegate = self
-        self.view.addSubview(lineChart)
-        views["chart"] = lineChart
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[chart]-|", options: [], metrics: nil, views: views))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart(==200)]", options: [], metrics: nil, views: views))
-
-        //        var delta: Int64 = 4 * Int64(NSEC_PER_SEC)
-        //        var time = dispatch_time(DISPATCH_TIME_NOW, delta)
-        //
-        //        dispatch_after(time, dispatch_get_main_queue(), {
-        //            self.lineChart.clear()
-        //            self.lineChart.addLine(data2)
-        //        });
-
-        //        var scale = LinearScale(domain: [0, 100], range: [0.0, 100.0])
-        //        var linear = scale.scale()
-        //        var invert = scale.invert()
-        //        println(linear(x: 2.5)) // 50
-        //        println(invert(x: 50)) // 2.5
-
-    }
-
-    func addData() {
-        let pgd = PredictionGraphData.init(predictionGroup: predictionGroup)
 
         let data = pgd.lineYPoints
         //let data2: [CGFloat] = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
@@ -112,6 +88,12 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
         if data.count > 0 { lineChart.addLine(data) }
         lineChart.addLine(data2)
 
+        lineChart.translatesAutoresizingMaskIntoConstraints = false
+        lineChart.delegate = self
+        self.view.addSubview(lineChart)
+        views["chart"] = lineChart
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[chart]-|", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-[chart(==200)]", options: [], metrics: nil, views: views))
     }
 
     override func didReceiveMemoryWarning() {
