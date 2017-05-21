@@ -54,7 +54,7 @@ class LineChartViewController: UIViewController, LineChartDelegate, StorageObser
 
         var views: [String: AnyObject] = [:]
 
-        label.text = "..."
+        label.text = "Prediction accuracy"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = NSTextAlignment.center
         self.view.addSubview(label)
