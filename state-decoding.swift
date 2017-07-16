@@ -1,36 +1,13 @@
-//
-//  Prediction.swift
-//  Calibrator
-//
-//  Created by Alex Humphreys on 29/01/2017.
-//  Copyright © 2017 Alex Humphreys. All rights reserved.
-//
+import Foundation
 
-import UIKit
-import os.log
-
-struct Prediction {
-    enum State : String {
-        case pending
-        case overdue
-        case correct
-        case incorrect
-
-        static func randomState() -> State {
-            let states: [State] = [.pending, .overdue, .correct, .incorrect]
-            // pick and return a new value
-            let rand = Int(arc4random_uniform(UInt32(states.count)))
-            return states[rand]
-        }
-    }
-
-    var content: String = ""
-    var probability: Int = 0
-    var state: State = .pending
-    let identifier = Prediction.nextIdentifier()
+enum State : String {
+    case pending
+    case overdue
+    case correct
+    case incorrect
 }
 
-extension Prediction.State: Decodable {
+extension State: Decodable {
     init(rawValue: String) {
         // TODO call super?
         switch rawValue {
@@ -54,6 +31,12 @@ extension Prediction.State: Decodable {
         print(state)
         self.init(rawValue: state)
     }
+}
+
+struct Prediction {
+    let content: String
+    let probability: Int
+    let state: State
 }
 
 extension Prediction: Decodable, Encodable {
@@ -83,47 +66,20 @@ extension Prediction: Decodable, Encodable {
     }
 }
 
-
-extension Prediction : Equatable {
-    static func ==(lhs: Prediction, rhs: Prediction) -> Bool {
-        return
-            lhs.content == rhs.content &&
-                lhs.probability == rhs.probability &&
-                lhs.state == rhs.state &&
-                lhs.identifier == rhs.identifier
-    }
+let json = """
+{
+ "content": "x will win",
+ "probability": 45,
+ "state": "overdue"
 }
+""".data(using: .utf8)! // our native (JSON) data
+let myStruct = try JSONDecoder().decode(Prediction.self, from: json) // decoding our data
+print(myStruct.state) // decoded!
+
+var encoder = JSONEncoder()
+let encoded = try? encoder.encode(myStruct)
+
+let string1 = String(data: encoded!, encoding: String.Encoding.utf8) ?? "Data could not be printed"
+print(string1)
 
 
-
-extension Prediction {
-    static let titleLength = 19
-
-    //MARK: Archiving Paths
-    
-    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("predictions")
-    
-    //MARK: Types
-    
-    struct PropertyKey {
-        static let content = "content"
-        static let probability = "probability"
-        static let state = "state"
-    }
-    
-    func asTitle() -> String {
-        if self.content.characters.count < Prediction.titleLength + 3 {
-            return self.content
-        } else {
-            let index = self.content.characters.index(self.content.characters.startIndex, offsetBy: Prediction.titleLength)
-            return self.content.substring(to: index) + "..."
-        }
-    }
-
-    private static var identifier: Int = 0
-    fileprivate static func nextIdentifier() -> Int {
-        identifier += 1
-        return identifier
-    }
-}

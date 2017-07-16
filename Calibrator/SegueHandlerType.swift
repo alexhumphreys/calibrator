@@ -28,7 +28,7 @@ extension SegueHandlerType where Self: UIViewController,
         guard
             let identifier = segue.identifier,
             let segueIdentifier = SegueIdentifier(rawValue: identifier)
-            else { fatalError("Invalid segue identifier \(segue.identifier).") }
+            else { fatalError("Invalid segue identifier \(segue.identifier ?? "default_identifier").") }
 
         return segueIdentifier
     }

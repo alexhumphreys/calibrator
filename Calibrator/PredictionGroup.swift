@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct PredictionGroup {
+struct PredictionGroup: Codable {
     var predictions: [Prediction] = []
 
     var resolved: PredictionGroup {
