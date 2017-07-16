@@ -21,15 +21,16 @@ fileprivate func randomPredictions() -> [Prediction] {
 
 class Storage : NSObject {
     static let sharedStorage: Storage = {
+
         let s = Storage()
-        var pg = PredictionGroup()
-        pg.predictions += [
-            Prediction(content: "X will win sport", probability: 70, state: .pending),
-            Prediction(content: "Y will increase in value", probability: 60, state: .pending),
-            Prediction(content: "Z will still be a mess", probability: 80, state: .pending)
-        ]
+
+        guard let savedPg = readFromDisk() else {
+            s.predictionGroup = defaultPredictionGroup()
+            return s
+        }
+
         //pg.predictions += randomPredictions()
-        s.predictionGroup = pg
+        s.predictionGroup = savedPg
         return s
     }()
 
@@ -41,18 +42,66 @@ class Storage : NSObject {
             saveToDisk()
         }
     }
+
+    private static func defaultPredictionGroup() -> PredictionGroup {
+        var pg = PredictionGroup()
+        pg.predictions += [
+            Prediction(content: "X will win sport", probability: 70, state: .pending),
+            Prediction(content: "Y will increase in value", probability: 60, state: .pending),
+            Prediction(content: "Z will still be a mess", probability: 80, state: .pending)
+        ]
+
+        return pg
+    }
 }
 
 
 extension Storage {
     func saveToDisk() {
-//        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(predictions, toFile: Prediction.ArchiveURL.path)
-//
-//        if isSuccessfulSave {
-//            os_log("Predictions successfully saved.", log: OSLog.default, type: .debug)
-//        } else {
-//            os_log("Failed to save predictions...", log: OSLog.default, type: .error)
-//        }
+        let fileName = "Test"
+        let dir = try? FileManager.default.url(for: .documentDirectory,
+                                               in: .userDomainMask, appropriateFor: nil, create: true)
+
+        // If the directory was found, we write a file to it and read it back
+        if let fileURL = dir?.appendingPathComponent(fileName).appendingPathExtension("txt") {
+
+            // Write to the file Test
+            let encoder = JSONEncoder()
+            let encoded = try? encoder.encode(predictionGroup)
+
+            let outString = String(data: encoded!, encoding: String.Encoding.utf8) ?? "Data could not be printed"
+
+
+            //let outString = "Write this text to the file"
+            do {
+                try outString.write(to: fileURL, atomically: true, encoding: .utf8)
+            } catch {
+                print("Failed writing to URL: \(fileURL), Error: " + error.localizedDescription)
+            }
+        } else {
+            print("Failed writing get file URL")
+        }
+    }
+
+    static func readFromDisk() -> PredictionGroup? {
+        let fileName = "Test"
+        let dir = try? FileManager.default.url(for: .documentDirectory,
+                                               in: .userDomainMask, appropriateFor: nil, create: true)
+
+        do {
+            if let fileURL = dir?.appendingPathComponent(fileName).appendingPathExtension("txt") {
+                let savedPredictionGroup = try JSONDecoder().decode(PredictionGroup.self, from: String(contentsOf: fileURL).data(using: .utf8)!)
+                print("Successfully read from disk")
+                print(savedPredictionGroup)
+
+                return savedPredictionGroup
+            } else {
+                return nil
+            }
+        } catch {
+            print("Could not read from disk")
+            return nil
+        }
     }
 }
 

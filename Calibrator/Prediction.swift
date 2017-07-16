@@ -30,6 +30,60 @@ struct Prediction {
     let identifier = Prediction.nextIdentifier()
 }
 
+extension Prediction.State: Decodable {
+    init(rawValue: String) {
+        // TODO call super?
+        switch rawValue {
+        case "pending": self = .pending
+        case "overdue": self = .overdue
+        case "correct": self = .correct
+        case "incorrect": self = .incorrect
+        default: self = .pending
+        }
+    }
+
+    init(from decoder: Decoder) throws {
+        enum MyStructKeys: String, CodingKey { // declaring our keys
+            case state = "state"
+        }
+
+        let container = try decoder.container(keyedBy: MyStructKeys.self) // defining our (keyed) container
+        let state: String = try container.decode(String.self, forKey: .state) // extracting the state
+        //let twitter: URL = try container.decode(URL.self, forKey: .twitter) // extracting the data
+
+        print(state)
+        self.init(rawValue: state)
+    }
+}
+
+extension Prediction: Decodable, Encodable {
+    enum MyStructKeys: String, CodingKey { // declaring our keys
+        case content = "content"
+        case probability = "probability"
+        case state = "state"
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: MyStructKeys.self)
+
+        try container.encode(content, forKey: .content)
+        try container.encode(probability, forKey: .probability)
+        try container.encode(state.rawValue, forKey: .state)
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: MyStructKeys.self) // defining our (keyed) container
+        let content: String = try container.decode(String.self, forKey: .content) // extracting the data
+        let probability: Int = try container.decode(Int.self, forKey: .probability) // extracting the data
+        let state: String = try container.decode(String.self, forKey: .state) // extracting the state
+        let state_obj = State.init(rawValue: state)
+        //let twitter: URL = try container.decode(URL.self, forKey: .twitter) // extracting the data
+
+        self.init(content: content, probability: probability, state: state_obj) //, twitter: twitter) // initializing our struct
+    }
+}
+
+
 extension Prediction : Equatable {
     static func ==(lhs: Prediction, rhs: Prediction) -> Bool {
         return
