@@ -1,5 +1,5 @@
-
-
+// https://github.com/zemirco/swift-linechart
+// MIT
 
 import UIKit
 import QuartzCore
