@@ -44,8 +44,12 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         }
     }
 
-    var pickerData: [Prediction.State] = []
-    
+    var pickerData: [Prediction.State] = [
+        Prediction.State.pending,
+        Prediction.State.correct,
+        Prediction.State.incorrect,
+        Prediction.State.overdue]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -56,12 +60,6 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
 
         contentTextField.delegate = self
         probabilityTextField.delegate = self
-
-        pickerData = [
-            Prediction.State.pending,
-            Prediction.State.correct,
-            Prediction.State.incorrect,
-            Prediction.State.overdue]
 
         // Set up views if editing an existing Prediction
         contentTextField.text = prediction?.content ?? ""
@@ -85,11 +83,14 @@ class PredictionViewController: UIViewController, UITextFieldDelegate, UINavigat
         guard
             contentTextField == contentTextField,
             probabilityTextField == probabilityTextField,
+            statePicker == statePicker,
             var p = prediction
             else { return }
         let probValue = Int(probabilityTextField.text ?? "")
         p.content = contentTextField.text ?? ""
         p.probability = probValue ?? 50
+        p.state = pickerData[statePicker.selectedRow(inComponent: 0)]
+
         prediction = p
         updateSaveButtonState()
     }
